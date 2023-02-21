@@ -20,7 +20,7 @@ function NavBar() {
 
   return (
     //NAVBAR
-    <div className="w-11/12 mx-8 my-auto">
+    <div className="mx-8 align-middle my-auto">
       {/* NAVBAR BOX */}
       <div className="grid grid-cols-3 items-center justify-between gap-4">
         {/* NAVABAR LEFT */}

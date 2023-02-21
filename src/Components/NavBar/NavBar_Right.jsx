@@ -5,17 +5,15 @@ function NavBar_Right(props) {
   const [openModel, SetOpenModel] = useState(false);
   const [openTokenBox, SetOpenTokenBox] = useState(false);
   return (
-    <div className="flex items-center gap-4 justify-center">
+    <div className="flex items-center gap-4 justify-end font-semibold">
       {/* NAVABAR RIGHT BOX  */}
-      <div className="flex items-center gap-4 bg-[#C77DFF] px-2 py-6 rounded-lg cursor-pointer uppercase">
+      <div className="flex items-center gap-4 bg-[#D01257] text-white px-3 py-3 rounded-lg cursor-pointer uppercase">
         {/* IMAGE NETWORK  */}
-        <div>
-          <SiEthereum size={30}></SiEthereum>
-        </div>
+        <SiEthereum className="text-white" size={20}></SiEthereum>
         <p>Network Name</p>
       </div>
       {/* ADDRESS BUTTON  */}
-      <button onClick={() => {}}>Address</button>
+      <button className="text-[#FFCEE4]  bg-[#D01257] px-3 py-3 rounded-lg cursor-pointer font-bold" onClick={() => {}}>Address</button>
 
       {openModel && (
         <Model SetOpenModel={SetOpenModel} connectWallet="Connect" />

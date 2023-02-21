@@ -2,13 +2,13 @@ import { Gi3DGlasses } from "react-icons/gi";
 
 function NavBar_Left(props) {
   return (
-    <div className="flex gap-16 items-center">
+    <div className="flex gap-16 items-center font-semibold">
       {/* IMAGES */}
       <div>
-        <Gi3DGlasses size={50} />
+        <Gi3DGlasses className="text-[#D01257]" size={50} />
       </div>
       {/* MENUITEMS */}
-      <div className="flex items-center gap-8 text-[#10002B]">
+      <div className="flex items-center gap-8 text-[#FB90B7]">
         {props.menuItem.map((elem, index) => (
           <p>{elem.name}</p>
         ))}

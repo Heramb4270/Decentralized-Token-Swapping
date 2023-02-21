@@ -1,2 +1,4 @@
-function Model() {}
+function Model() {
+    
+}
 export default Model;
