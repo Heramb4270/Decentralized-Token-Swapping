@@ -1,8 +1,9 @@
-import { NavBar } from "../Components";
+import { NavBar, HeroSection } from "../Components";
 function App() {
   return (
     <div>
-      <NavBar/>
+      <NavBar />
+      <HeroSection />
     </div>
   );
 }
