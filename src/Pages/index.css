@@ -6,8 +6,28 @@
 
 @layer base {
   html {
-    background-color: #0F1021;
+    background-color: #0f1021;
     font-family: "Roboto", sans-serif;
-    color: #FB90B7;
+    color: #fb90b7;
   }
+}
+
+.blurry-bg {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-image: linear-gradient(rgba(36, 36, 36, 0.63), rgba(43, 43, 43, 0.623));
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+.blurry-bg::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(7px);
 }

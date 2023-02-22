@@ -2,7 +2,7 @@ import { NavBar } from "../Components";
 function App() {
   return (
     <div>
-      <NavBar />
+      <NavBar/>
     </div>
   );
 }
