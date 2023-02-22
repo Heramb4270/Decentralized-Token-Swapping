@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { Token, SearchToken } from "../index";
-import { TiCog } from "react-icons/ti";
-import { SiEthereum } from "react-icons/si";
 
+import { TiCog } from "react-icons/ti";
+import TokenOne from "./TokenOne";
+import TokenTwo from "./TokenTwo";
 function HeroSection(props) {
   //USESTATE
   const [openSetting, setOpenSetting] = useState(false);
@@ -11,14 +12,14 @@ function HeroSection(props) {
 
   //TOKEN 1
 
-  const [TokenOne, setTokenOne] = useState({
+  const [TokenOne1, setTokenOne] = useState({
     name: "",
     image: "",
   });
 
   //TOKEN 2
 
-  const [TokenTwo, setTokenTwo] = useState({
+  const [TokenTwo1, setTokenTwo] = useState({
     name: "",
     image: "",
   });
@@ -38,41 +39,12 @@ function HeroSection(props) {
         </div>
         {/* HEROSECTION INPUT  */}
         {/* TOKEN ONE  */}
-        <div className="flex items-center justify-between border rounded-lg pl-8 mt-4 border-two">
-          <input
-            type="text"
-            placeholder="0"
-            className="input-two placeholder:text-[#0F1021]"
-          />
-          <button
-            onClick={() => openToken1(true)}
-            className="flex items-center justify-between gap-4 leading-[0] bg-[#FFCEE4] px-4 py-4 font-bold text-xl rounded-lg"
-          >
-            <SiEthereum size={30} />
 
-            {TokenOne.name || "ETH"}
-            <small>6969</small>
-          </button>
-        </div>
+        <TokenOne TokenOne={TokenOne1} SetOpenToken1={SetOpenToken1} />
 
         {/* TOKEN TWO */}
-        <div className="flex items-center justify-between border rounded-lg pl-8 mt-4 border-two">
-          <input
-            type="text"
-            placeholder="0"
-            className="input-two placeholder:text-[#0F1021]"
-          />
-          <button
-            onClick={() => openToken1(true)}
-            className="flex items-center justify-between gap-4 leading-[0] bg-[#FFCEE4] px-4 py-4 font-bold text-xl rounded-lg"
-          >
-            <SiEthereum size={30} />
 
-            {TokenTwo.name || "ETH"}
-            <small>6969</small>
-          </button>
-        </div>
-
+        <TokenTwo TokenTwo={TokenTwo1} SetOpenToken2={SetOpenToken2} />
         {props.accounts ? (
           <button className="input-three">Connect Wallet</button>
         ) : (
