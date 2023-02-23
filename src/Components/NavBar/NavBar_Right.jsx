@@ -16,10 +16,10 @@ function NavBar_Right(props) {
       <button className="text-[#FFCEE4]  bg-[#D01257] px-3 py-3 rounded-lg cursor-pointer font-bold" onClick={() => {setOpenModel(true)}}>Address</button>
       
       {openModel && (
-        <Model setOpenModel={setOpenModel} connectWallet="Connect" />
+        <Model setOpenModel={setOpenModel} openModel={openModel} connectWallet="Connect" />
       )}
 
-      {openTokenBox && (
+      {!openTokenBox && (
         <TokenList setOpenTokenBox={setOpenTokenBox} tokenDate="hey" />
       )}
     </div>

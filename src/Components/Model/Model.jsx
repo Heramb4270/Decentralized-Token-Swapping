@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { HiX } from "react-icons/hi";
 
-function Model({ setOpenModel, connectWallet }) {
+function Model({ setOpenModel, openModel, connectWallet }) {
   // useStates
   const walletMenu = ["MetaMask", "Coinbase", "Wallet", "WalletConnect"];
   return (
