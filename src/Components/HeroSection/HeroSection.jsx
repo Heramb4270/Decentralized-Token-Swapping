@@ -25,10 +25,10 @@ function HeroSection(props) {
   });
 
   return (
-    // HEROSECTION
-    <div className="w-11/12 mx-8 my-auto flex items-center justify-center relative text-[#0F1021]">
+    // HEROSECTION text-[#18122B]
+    <div className="w-11/12 mx-8 my-auto flex items-center justify-center relative text-white">
       {/* //HEROSECTION BOX  */}
-      <div className="mt-20 bg-[#FB90B7] px-4 py-4 rounded-lg w-[32rem]">
+      <div className="mt-20 bg-[#A084DC] px-4 py-4 rounded-lg w-[32rem]">
         {/* {HEROXSECTION HEADING} */}
         <div className="flex items-center justify-between">
           <p>Swap</p>
@@ -54,7 +54,7 @@ function HeroSection(props) {
         )}
       </div>
 
-      {openSetting && <Token openSetting={openSetting} />}
+      {openSetting && <Token setOpenSetting={setOpenSetting} />}
 
       {openToken1 && (
         <SearchToken

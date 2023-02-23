@@ -29,8 +29,30 @@
   border-radius: 2rem;
   font-weight: 500;
 }
-.border-two {
+
+.input-four {
+  background-color: #ffcee4;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.input-five {
+  border: 0;
+  outline: 0;
+  width: 80%;
+  background-color: white;
+  color: #0f1021;
+  border-radius: 0.5rem;
+  text-align: end;
+  padding: 0.5rem 1rem;
   border: 1px solid #ffcee4;
+}
+.border-two {
+  border: 1px solid #0f1021;
 }
 .blurry-bg {
   width: 100%;
