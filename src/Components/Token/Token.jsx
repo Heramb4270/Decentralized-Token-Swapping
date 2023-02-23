@@ -24,7 +24,7 @@ function Token(props) {
 
           {/* TOKEN BOX INPUT  */}
           <div className="flex items-center gap-4 my-2">
-            <button className="input-four">Auto</button>
+            <button className="input-four bg-gradient-to-r from-[#d1004d] to-[#df3674]">Auto</button>
             <input type="text" placeholder="0.30%" className="input-five" />
           </div>
 
@@ -34,7 +34,7 @@ function Token(props) {
           </p>
           <div className="flex items-center gap-4 my-2">
             <input type="text" placeholder="30" className="input-five" />
-            <button className="input-four">Minutes</button>
+            <button className="input-four bg-gradient-to-r from-[#d1004d] to-[#df3674]">Minutes</button>
           </div>
 
           <h2 className=" text-xl leading-0 my-4">Interface Setting</h2>
