@@ -2,15 +2,15 @@ import { SiEthereum } from "react-icons/si";
 
 function TokenTwo(props) {
   return (
-    <div className="flex items-center justify-between border rounded-lg pl-8 mt-4 border-two">
+    <div className="flex items-center justify-between rounded-lg pl-8 mt-4 border-[1.5px] border-[#001438]">
       <input
         type="text"
         placeholder="0"
-        className="input-two placeholder:text-[#0F1021]"
+        className="input-two placeholder:text-[#ffffff]"
       />
       <button
         onClick={() => props.SetOpenToken2(true)}
-        className="flex items-center justify-between gap-4 leading-[0] bg-[#FFCEE4] px-4 py-4 font-bold text-xl rounded-lg"
+        className="flex items-center justify-between gap-4 leading-[0] bg-gradient-to-r from-[#001438] to-[#021a46] px-4 py-4 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-white hover:to-gray-300 hover:text-black"
       >
         <SiEthereum size={30} />
 

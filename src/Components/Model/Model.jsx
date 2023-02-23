@@ -7,7 +7,7 @@ function Model({ setOpenModel, connectWallet }) {
   return (
     <div className="Model absolute bg-[] inset-0 grid place-content-center justify-center max-h-screen max-w-full z-20">
       <div className="blurry-bg"></div>
-      <div className="Model_box bg-[#0F10215a] ring-[#ff1c6f] ring-2 p-8 rounded-lg shadow-2xl">
+      <div className="Model_box bg-gradient-to-b from-[#000e29] to-[#04183d] ring-[#ff1c6f] ring-2 p-8 rounded-lg shadow-2xl">
         <div className="Model_Box_heading flex items-center justify-between">
           <p className="text-xl">Connect a wallet</p>
           <div>
