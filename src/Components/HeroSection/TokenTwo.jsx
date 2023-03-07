@@ -12,7 +12,7 @@ function TokenTwo(props) {
         onClick={() => props.SetOpenToken2(true)}
         className="flex items-center justify-between gap-4 leading-[0] bg-gradient-to-r from-[#001438] to-[#021a46] px-4 py-4 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-white hover:to-gray-300 hover:text-black"
       >
-        <SiEthereum size={30} />
+        {props.TokenTwo.image || <SiEthereum size={20}></SiEthereum>}
 
         {props.TokenTwo.name || "ETH"}
         <small>6969</small>

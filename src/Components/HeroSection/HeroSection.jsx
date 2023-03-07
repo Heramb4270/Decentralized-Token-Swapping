@@ -1,14 +1,22 @@
 import { useState, useContext } from "react";
 import { Token, SearchToken } from "../index";
 
+import { FaEthereum } from "react-icons/fa";
+import { FaBitcoin } from "react-icons/fa";
+import { SiDogecoin } from "react-icons/si";
+
+import { HiX } from "react-icons/hi";
+import { IoIosSearch } from "react-icons/io";
+import { IoLogoUsd } from "react-icons/io";
+
 import { TiCog } from "react-icons/ti";
 import TokenOne from "./TokenOne";
 import TokenTwo from "./TokenTwo";
 function HeroSection(props) {
   //USESTATE
   const [openSetting, setOpenSetting] = useState(false);
-  const [openToken1, SetOpenToken1] = useState(false);
-  const [openToken2, SetOpenToken2] = useState(false);
+  const [openToken1, setOpenToken1] = useState(false);
+  const [openToken2, setOpenToken2] = useState(false);
 
   //TOKEN 1
 
@@ -26,7 +34,7 @@ function HeroSection(props) {
 
   return (
     // HEROSECTION text-[#18122B]
-    <div className=" my-auto flex items-center justify-center relative text-white">
+    <div className="my-auto flex items-center justify-center relative text-white">
       {/* //HEROSECTION BOX  */}
       <div className="mt-20 bg-gradient-to-b from-[#d1004d] to-[#df3674] px-4 py-4 rounded-lg w-[32rem]">
         {/* {HEROXSECTION HEADING} */}
@@ -40,11 +48,11 @@ function HeroSection(props) {
         {/* HEROSECTION INPUT  */}
         {/* TOKEN ONE  */}
 
-        <TokenOne TokenOne={TokenOne1} SetOpenToken1={SetOpenToken1} />
+        <TokenOne TokenOne={TokenOne1} SetOpenToken1={setOpenToken1} />
 
         {/* TOKEN TWO */}
 
-        <TokenTwo TokenTwo={TokenTwo1} SetOpenToken2={SetOpenToken2} />
+        <TokenTwo TokenTwo={TokenTwo1} SetOpenToken2={setOpenToken2} />
         {props.accounts ? (
           <button className="input-three">Connect Wallet</button>
         ) : (
@@ -58,16 +66,16 @@ function HeroSection(props) {
 
       {openToken1 && (
         <SearchToken
-          openToken1={setTokenOne}
-          token={setTokenOne}
+          openToken={setOpenToken1}
+          tokens={setTokenOne}
           tokenData={props.tokenData}
         />
       )}
 
       {openToken2 && (
         <SearchToken
-          openToken1={setTokenTwo}
-          token={setTokenTwo}
+          openToken={setOpenToken2}
+          tokens={setTokenTwo}
           tokenData={props.tokenData}
         />
       )}
