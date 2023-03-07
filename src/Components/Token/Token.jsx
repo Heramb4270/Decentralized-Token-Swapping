@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Toggle from "../Toggle/Toggle";
 import { HiLockClosed } from "react-icons/hi2";
 import { TiCog } from "react-icons/ti";
+import { HiX } from "react-icons/hi";
+
 
 function Token(props) {
   return (
@@ -14,7 +16,7 @@ function Token(props) {
           {/* TOKEN BOX HEADING  */}
           <div className="flex items-center justify-between">
             <h4 className=" text-xl leading-0 my-4">Setting</h4>
-            <TiCog size={30} onClick={() => props.setOpenSetting(false)} />
+            <HiX onClick={() => props.setOpenSetting(false)} className="text-white w-5 h-5"></HiX>
           </div>
           {/* TOKEN BOX PARA  */}
           <p className="flex items-center gap-4 my-2">
@@ -41,8 +43,8 @@ function Token(props) {
           {/* TOKEN BOX TOGGLE  */}
           <div className="flex items-center justify-between my-4">
             {/* TOKEN BOX  */}
-            <p>
-              Transaction DeadLine
+            <p className="flex justify-between">
+              <p>Transaction DeadLine</p>
               <Toggle />
             </p>
           </div>
