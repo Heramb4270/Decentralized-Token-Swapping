@@ -1,38 +1,35 @@
 import React, { useState } from "react";
-import { FaEthereum } from "react-icons/fa";
-import { FaBitcoin } from "react-icons/fa";
-import { SiDogecoin } from "react-icons/si";
-
 import { HiX } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
-import { IoLogoUsd } from "react-icons/io";
+
+import Icons from "../../cryptoIcons/cryptoIcons";
 
 function SearchToken({ openToken, tokens, tokenData }) {
   const [active, setActive] = useState(1);
   const coin = [
     {
-      img: <FaEthereum className="w-5 h-5 inline"></FaEthereum>,
+      img: Icons.eth,
       name: "ETH",
     },
     {
-      img: <FaEthereum className="w-5 h-5 inline"></FaEthereum>,
+      img: Icons.dai,
       name: "DAI",
     },
     {
-      img: <SiDogecoin className="w-5 h-5 inline"></SiDogecoin>,
+      img: Icons.eth,
       name: "DOG",
     },
     {
-      img: <IoLogoUsd className="w-5 h-5 inline"></IoLogoUsd>,
+      img: Icons.usdc,
       name: "USDC",
     },
     {
-      img: <FaEthereum className="w-5 h-5 inline"></FaEthereum>,
-      name: "WETH",
+      img: Icons.matic,
+      name: "MATIC",
     },
     {
-      img: <FaEthereum className="w-5 h-5 inline"></FaEthereum>,
-      name: "ETH",
+      img: Icons.usdt,
+      name: "USDT",
     },
   ];
 
@@ -65,13 +62,17 @@ function SearchToken({ openToken, tokens, tokenData }) {
               className={
                 active == i + 1
                   ? `flex items-center gap-1 bg-[#D01257] border-[#D01257] border-2 p-[.3rem] rounded-lg cursor-pointer`
-                  : `flex items-center gap-1 border-[#D01257] border-2 p-[.3rem] rounded-lg cursor-pointer transition-all hover:bg-gradient-to-r from-white to-slate-200 hover:text-black hover:border-black`
+                  : `group flex items-center gap-1 border-[#D01257] border-2 p-[.3rem] rounded-lg cursor-pointer transition-all hover:bg-gradient-to-r from-white to-slate-200 hover:text-black hover:border-black icon`
               }
               onClick={() => (
-                setActive(i + 1), tokens({ name: el.name, image: el.img })
+                setActive(i + 1),
+                tokens({ name: el.name, image: el.img, size: 35 })
               )}
             >
-              {el.img || <FaBitcoin className="w-5 h-5"></FaBitcoin>}
+              <img
+                src={el.img || Icons.dai}
+                className="w-6 h-6 group-hover:invert"
+              />
               {el.name}
             </button>
           ))}

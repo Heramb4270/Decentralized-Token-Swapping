@@ -1,4 +1,4 @@
-import { SiEthereum } from "react-icons/si";
+import Icons from "../../cryptoIcons/cryptoIcons";
 
 function TokenOne(props) {
   return (
@@ -10,10 +10,12 @@ function TokenOne(props) {
       />
       <button
         onClick={() => props.SetOpenToken1(true)}
-        className="flex items-center justify-between gap-4 leading-[0] bg-gradient-to-r from-[#001438] to-[#021a46] px-4 py-4 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-white hover:to-gray-300 hover:text-black"
+        className="group flex items-center justify-between gap-4 leading-[0] bg-gradient-to-r from-[#001438] to-[#021a46] px-4 py-4 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-white hover:to-gray-300 hover:text-black icon"
       >
-        {/* {props.TokenOne.image.size=30} */}
-        {props.TokenOne.image || <SiEthereum size={20}></SiEthereum>}
+        <img
+          src={props.TokenOne.image || Icons.eth}
+          className="w-9 h-9 group-hover:invert"
+        />
 
         {props.TokenOne.name || "ETH"}
         <small>6969</small>
