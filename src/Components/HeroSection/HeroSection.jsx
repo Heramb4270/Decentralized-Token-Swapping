@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import { Token, SearchToken } from "../index";
+import { SwapButton } from "./SwapButton";
 
 import { TiCog } from "react-icons/ti";
 import TokenOne from "./TokenOne";
 import TokenTwo from "./TokenTwo";
+
 function HeroSection(props) {
   //USESTATE
   const [openSetting, setOpenSetting] = useState(false);
@@ -48,12 +50,13 @@ function HeroSection(props) {
         {props.accounts ? (
           <button className="input-three">Connect Wallet</button>
         ) : (
-          <button
-            onClick={() => {}}
-            className="font-medium text-white bg-gradient-to-r from-black to-gray-900 w-full rounded-full py-3 my-4 drop-shadow-xl hover:bg-gradient-to-r hover:from-white hover:to-gray-300 transition-all hover:text-black"
-          >
-            Swap
-          </button>
+          // <button
+          //   onClick={() => {}}
+          //   className="font-medium text-white bg-gradient-to-r from-black to-gray-900 w-full rounded-full py-3 my-4 drop-shadow-xl hover:bg-gradient-to-r hover:from-white hover:to-gray-300 transition-all hover:text-black"
+          // >
+          //   Swap
+          // </button>
+          <SwapButton />
         )}
       </div>
 
