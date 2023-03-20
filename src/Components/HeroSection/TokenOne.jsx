@@ -10,7 +10,7 @@ function TokenOne(props) {
       />
       <button
         onClick={() => props.SetOpenToken1(true)}
-        className="group flex items-center justify-between gap-4 leading-[0] bg-gradient-to-r from-[#001438] to-[#021a46] px-4 py-4 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-white hover:to-gray-300 hover:text-black icon"
+        className="group flex items-center justify-between gap-4 leading-[0] bg-gradient-to-r from-[#001438] to-[#021a46] px-4 py-4 font-bold text-xl rounded-lg hover:bg-gradient-to-r hover:from-white hover:to-gray-300 hover:text-black icon w-[43%]"
       >
         <img
           src={props.TokenOne.image || Icons.eth}
