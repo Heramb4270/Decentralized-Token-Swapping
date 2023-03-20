@@ -76,3 +76,7 @@
   height: 100vh;
   backdrop-filter: blur(7px);
 }
+
+.icon:hover ico {
+  fill: #000;
+}
