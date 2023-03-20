@@ -18,7 +18,6 @@ function TokenOne(props) {
         />
 
         {props.TokenOne.name || "ETH"}
-        <small>6969</small>
       </button>
     </div>
   );

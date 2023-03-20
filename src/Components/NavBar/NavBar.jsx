@@ -2,7 +2,8 @@ import NavBar_Left from "./NavBar_Left";
 import NavBar_Middle from "./NavBar_Middle";
 import NavBar_Right from "./NavBar_Right";
 import Link from "../../Links/Link";
-function NavBar() {
+
+function NavBar(props) {
   const menuItem = [
     {
       name: "Swap",
@@ -31,7 +32,12 @@ function NavBar() {
 
         {/* NAVABAR RIGHT  */}
 
-        <NavBar_Right />
+        <NavBar_Right
+          provider={props.provider}
+          isConnected={props.isConnected}
+          signerAddress={props.signerAddress}
+          getSigner={props.getSigner}
+        />
       </div>
     </div>
   );

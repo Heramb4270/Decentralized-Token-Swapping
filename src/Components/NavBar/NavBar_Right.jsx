@@ -7,16 +7,26 @@ function NavBar_Right(props) {
   const [openModel, setOpenModel] = useState(false);
   const [openTokenBox, setOpenTokenBox] = useState(false);
   const [account, setAccount] = useState(true);
+  const displayAddress = `${props.signerAddress?.substring(0, 10)}...`;
   return (
     <div className="flex items-center gap-4 justify-end font-semibold">
       {/* NAVABAR RIGHT BOX  */}
       <div className="flex items-center gap-4 bg-[#D01257] text-white px-3 py-3 rounded-lg cursor-pointer uppercase">
         {/* IMAGE NETWORK  */}
         <img src={Icons.eth} className="w-6 h-6" />
-        <p>Network Name</p>
+        <p>Polygon</p>
       </div>
       {/* ADDRESS BUTTON  */}
-      {account ? (
+      {props.isConnected() ? (
+        <div
+          className="text-[#FFCEE4]  bg-[#D01257] px-3 py-3 rounded-lg cursor-pointer font-bold"
+          onClick={() => {
+            setOpenTokenBox(true);
+          }}
+        >
+          {displayAddress}
+        </div>
+      ) : (
         <button
           className="text-[#FFCEE4]  bg-[#D01257] px-3 py-3 rounded-lg cursor-pointer font-bold"
           onClick={() => {
@@ -25,24 +35,19 @@ function NavBar_Right(props) {
         >
           Connect
         </button>
-      ) : (
-        <button
-          className="text-[#FFCEE4]  bg-[#D01257] px-3 py-3 rounded-lg cursor-pointer font-bold"
-          onClick={() => {
-            setOpenTokenBox(true);
-          }}
-        >
-          Address
-        </button>
       )}
 
       {openModel && (
-        <Model setOpenModel={setOpenModel} connectWallet="Connect" />
+        <Model
+          setOpenModel={setOpenModel}
+          provider={props.provider}
+          isConnected={props.isConnected}
+          signerAddress={props.signerAddress}
+          getSigner={props.getSigner}
+        />
       )}
 
-      {openTokenBox && (
-        <TokenList setOpenTokenBox={setOpenTokenBox} tokenDate="hey" />
-      )}
+      {openTokenBox && <TokenList setOpenTokenBox={setOpenTokenBox} />}
     </div>
   );
 }

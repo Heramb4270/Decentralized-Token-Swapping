@@ -19,7 +19,6 @@ function TokenTwo(props) {
         />
 
         {props.TokenTwo.name || "ETH"}
-        <small>6969</small>
       </button>
     </div>
   );

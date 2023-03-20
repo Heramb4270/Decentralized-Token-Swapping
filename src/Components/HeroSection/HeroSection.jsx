@@ -47,16 +47,10 @@ function HeroSection(props) {
         {/* TOKEN TWO */}
 
         <TokenTwo TokenTwo={TokenTwo1} SetOpenToken2={setOpenToken2} />
-        {props.accounts ? (
-          <button className="input-three">Connect Wallet</button>
+        {props.isConnected() ? (
+          <SwapButton connected={true} getSigner={props.getSigner} />
         ) : (
-          // <button
-          //   onClick={() => {}}
-          //   className="font-medium text-white bg-gradient-to-r from-black to-gray-900 w-full rounded-full py-3 my-4 drop-shadow-xl hover:bg-gradient-to-r hover:from-white hover:to-gray-300 transition-all hover:text-black"
-          // >
-          //   Swap
-          // </button>
-          <SwapButton />
+          <SwapButton connected={false} getSigner={props.getSigner} />
         )}
       </div>
 

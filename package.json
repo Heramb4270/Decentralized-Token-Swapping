@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "ethers": "^5.5.4",
     "react": "^18.2.0",
     "react-canvas-confetti": "^1.3.0",
     "react-crypto-icons": "github:shed3/react-crypto-icons",

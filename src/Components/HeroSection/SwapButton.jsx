@@ -10,7 +10,7 @@ const canvasStyles = {
   left: 0,
 };
 
-export function SwapButton() {
+export function SwapButton(props) {
   const refAnimationInstance = useRef(null);
 
   const getInstance = useCallback((instance) => {
@@ -57,14 +57,25 @@ export function SwapButton() {
 
   return (
     <>
-      <button
-        onClick={() => {
-          fire();
-        }}
-        className="font-medium text-white bg-gradient-to-r from-black to-gray-900 w-full rounded-full py-3 my-4 drop-shadow-xl hover:bg-gradient-to-r hover:from-white hover:to-gray-300 transition-all hover:text-black"
-      >
-        Swap
-      </button>
+      {props.connected ? (
+        <button
+          onClick={() => {
+            fire();
+          }}
+          className="font-medium text-white bg-gradient-to-r from-black to-gray-900 w-full rounded-full py-3 my-4 drop-shadow-xl hover:bg-gradient-to-r hover:from-white hover:to-gray-300 transition-all hover:text-black"
+        >
+          Swap
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            fire(), props.getSigner();
+          }}
+          className="font-medium text-white bg-gradient-to-r from-black to-gray-900 w-full rounded-full py-3 my-4 drop-shadow-xl hover:bg-gradient-to-r hover:from-white hover:to-gray-300 transition-all hover:text-black"
+        >
+          Connect Wallet
+        </button>
+      )}
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
     </>
   );
