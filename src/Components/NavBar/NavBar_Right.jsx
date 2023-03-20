@@ -6,7 +6,6 @@ import Icons from "../../cryptoIcons/cryptoIcons";
 function NavBar_Right(props) {
   const [openModel, setOpenModel] = useState(false);
   const [openTokenBox, setOpenTokenBox] = useState(false);
-  const [account, setAccount] = useState(true);
   const displayAddress = `${props.signerAddress?.substring(0, 10)}...`;
   return (
     <div className="flex items-center gap-4 justify-end font-semibold">

@@ -5,15 +5,12 @@ import React from "react";
 function TokenList(props) {
   const data = [1, 2, 3];
   return (
-    <div
-      onClick={() => console.log("hii")}
-      className="TokenList absolute w-72 h-3/4 shadow-2xl ring-[#ff1c6f] ring-2 rounded-lg bg-[#0F1021] p-4 xl:top-[5rem]"
-    >
+    <div className="TokenList absolute w-72 h-3/4 shadow-2xl ring-[#ff1c6f] ring-2 rounded-lg bg-[#0F1021] p-4 xl:top-[5rem]">
       <div className="flex item justify-between p-4">
         <div className="TokenList_title font-black text-xl text-[#ff1c6f] rounded-lg">
           <h2>Your Token List</h2>
         </div>
-        <button>
+        <button onClick={() => props.setOpenTokenBox(false)}>
           <HiX size={50} className="cursor-pointer text-white w-5 h-5"></HiX>
         </button>
       </div>
