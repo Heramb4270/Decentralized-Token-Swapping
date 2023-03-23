@@ -1,4 +1,5 @@
 import { AlphaRouter, SwapType } from "@uniswap/smart-order-router";
+// const AlphaRouter = require("@uniswap/smart-order-router");
 const ERC20ABI = [
   {
     inputs: [],
