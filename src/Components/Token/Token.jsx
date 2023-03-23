@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Toggle from "../Toggle/Toggle";
 import { HiLockClosed } from "react-icons/hi2";
 import { TiCog } from "react-icons/ti";
@@ -28,15 +27,25 @@ function Token(props) {
               <button className="input-four bg-gradient-to-r from-[#d1004d] to-[#df3674]">
                 Auto
               </button>
-              <input type="text" placeholder="0.30%" className="input-five" />
+              <input
+                type="text"
+                onChange={(e) => props.setSlippageAmount(e.target.value)}
+                placeholder="0.30%"
+                className="input-five"
+              />
             </div>
 
             <p className="flex items-center gap-4 my-2">
-              Slippage Tolerance
+              DeadLine
               <HiLockClosed size={20} />
             </p>
             <div className="flex items-center gap-4 my-2">
-              <input type="text" placeholder="30" className="input-five" />
+              <input
+                type="text"
+                placeholder="30"
+                className="input-five"
+                onChange={(e) => props.setDeadlineMinutes(e.target.value)}
+              />
               <button className="input-four bg-gradient-to-r from-[#d1004d] to-[#df3674]">
                 Minutes
               </button>

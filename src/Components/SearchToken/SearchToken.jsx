@@ -1,37 +1,10 @@
 import React, { useState } from "react";
 import { HiX } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
-
 import Icons from "../../cryptoIcons/cryptoIcons";
 
-function SearchToken({ openToken, tokens, tokenData }) {
+function SearchToken({ openToken, tokens, tokenData, coin }) {
   const [active, setActive] = useState(1);
-  const coin = [
-    {
-      img: Icons.eth,
-      name: "ETH",
-    },
-    {
-      img: Icons.dai,
-      name: "DAI",
-    },
-    {
-      img: Icons.eth,
-      name: "DOG",
-    },
-    {
-      img: Icons.usdc,
-      name: "USDC",
-    },
-    {
-      img: Icons.matic,
-      name: "MATIC",
-    },
-    {
-      img: Icons.usdt,
-      name: "USDT",
-    },
-  ];
 
   return (
     <div className="SearchToken absolute top-[15%] mx-0 my-auto bg-[#15162e] p-8 rounded-lg w-[30rem] h-96 drop-shadow-2xl shadow-lg">

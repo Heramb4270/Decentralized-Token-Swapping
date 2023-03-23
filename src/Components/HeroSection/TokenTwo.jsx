@@ -1,4 +1,3 @@
-import { SiEthereum } from "react-icons/si";
 import Icons from "../../cryptoIcons/cryptoIcons";
 
 function TokenTwo(props) {
@@ -7,6 +6,7 @@ function TokenTwo(props) {
       <input
         type="text"
         placeholder="0"
+        value={props.output}
         className="input-two placeholder:text-[#ffffff]"
       />
       <button

@@ -1,11 +1,14 @@
 import Icons from "../../cryptoIcons/cryptoIcons";
-
 function TokenOne(props) {
   return (
     <div className="flex items-center justify-between rounded-lg pl-8 mt-4 border-[1.5px] border-[#001438]">
       <input
         type="text"
         placeholder="0"
+        onChange={(e) => {
+          props.setTokenOneValue(e.target.value),
+            props.SwapPrice(e.target.value);
+        }}
         className="input-two placeholder:text-[#ffffff]"
       />
       <button
