@@ -1,4 +1,4 @@
-//import { getPrice } from "./ProcessTransaction.js";
+import { getPrice } from "./ProcessTransaction.js";
 import data from "./constants.js";
 // import { ethers, BigNumber } from "ethers";
 // //import * as JSBI from "jsbi";
