@@ -5,7 +5,7 @@ function TokenOne(props) {
       <input
         type="text"
         placeholder="0"
-        onChange={(e) => {
+        onBlur={(e) => {
           props.setTokenOneValue(e.target.value),
             props.SwapPrice(e.target.value);
         }}

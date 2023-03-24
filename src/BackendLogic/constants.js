@@ -50,7 +50,7 @@ const data = {
 
   WMATIC: new Token(
     137,
-    "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
+    "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
     18,
     "WMATIC",
     "Wrapped MATIC"

@@ -3,7 +3,7 @@ import { HiX } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import Icons from "../../cryptoIcons/cryptoIcons";
 
-function SearchToken({ openToken, tokens, tokenData, coin }) {
+function SearchToken({ openToken, tokens, tokenData, coin, SwapPrice }) {
   const [active, setActive] = useState(1);
 
   return (
@@ -38,8 +38,7 @@ function SearchToken({ openToken, tokens, tokenData, coin }) {
                   : `group flex items-center gap-1 border-[#D01257] border-2 p-[.3rem] rounded-lg cursor-pointer transition-all hover:bg-gradient-to-r from-white to-slate-200 hover:text-black hover:border-black icon`
               }
               onClick={() => (
-                setActive(i + 1),
-                tokens({ name: el.name, image: el.img, size: 35 })
+                setActive(i + 1), tokens({ name: el.name, image: el.img })
               )}
             >
               <img

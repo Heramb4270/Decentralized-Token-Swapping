@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Token, SearchToken } from "../index";
 import { SwapButton } from "./SwapButton";
 
@@ -36,8 +36,11 @@ function HeroSection(props) {
     name: "",
     image: "",
   });
+  useEffect(() => {
+    GettingQuotes();
+  }, [TokenOne1, TokenTwo1]);
   const GettingQuotes = async (
-    inputAmount,
+    inputAmount1 = inputAmount,
     slippageAmt = slippageAmount,
     deadlineMin = deadlineMinutes,
     signerAddress = props.signerAddress,
@@ -46,24 +49,22 @@ function HeroSection(props) {
     provider = props.provider
   ) => {
     setLoading(true);
-    setInputAmount(inputAmount);
-    const resData = SwapPrice(
-      // inputAmount,
-      // (slippageAmt = slippageAmount),
-      // (deadlineMin = deadlineMinutes),
-      // (signerAddress = props.signerAddress),
+    setInputAmount(inputAmount1);
+    const resData = await SwapPrice(
+      inputAmount1,
+      slippageAmt,
+      deadlineMin,
+      signerAddress,
       Token1,
       Token2,
-      (provider = props.provider)
+      provider
     );
-    // setTransaction(resData[0]);
-    // console.log(resData[0]);
-    // setOutputAmount(resData[1]);
-    // console.log(resData[1]);
+    setOutputAmount(resData[0]);
+    console.log(resData[0]);
 
-    // setRatio(resData[2]);
-    // console.log(resData[2]);
-    // setLoading(false);
+    setRatio(resData[1]);
+    console.log(resData[1]);
+    setLoading(false);
   };
 
   return (
@@ -94,6 +95,7 @@ function HeroSection(props) {
         {/* TOKEN TWO */}
 
         <TokenTwo
+          inputAmount={inputAmount}
           TokenTwo={TokenTwo1}
           setTokenTwo={setTokenTwo}
           output={outputAmount}
@@ -117,19 +119,21 @@ function HeroSection(props) {
 
       {openToken1 && (
         <SearchToken
+          inputAmount={inputAmount}
           coin={Coins_Token_1}
           openToken={setOpenToken1}
           tokens={setTokenOne}
-          tokenData={props.tokenData}
+          tokenData="Token1"
         />
       )}
 
       {openToken2 && (
         <SearchToken
+          inputAmount={inputAmount}
           coin={Coins_Token_2}
           openToken={setOpenToken2}
           tokens={setTokenTwo}
-          tokenData={props.tokenData}
+          tokenData="Token2"
         />
       )}
     </div>
