@@ -71,7 +71,8 @@ function HeroSection(props) {
     // HEROSECTION text-[#18122B]
     <div className="my-auto flex items-center justify-center relative text-white">
       {/* //HEROSECTION BOX  */}
-      <div className="mt-20 bg-gradient-to-b from-[#d1004d] to-[#df3674] px-4 py-4 rounded-lg w-[32rem]">
+      {/* bg-gradient-to-b from-[#d1004d] to-[#df3674] */}
+      <div className="mt-20 bg-gradient-to-b from-[#d1004d] to-[#df3674] px-4 py-4 rounded-3xl w-[32rem]">
         {/* {HEROXSECTION HEADING} */}
         <div className="flex items-center justify-between">
           <p className="font-bold">Swap</p>
@@ -99,6 +100,7 @@ function HeroSection(props) {
           TokenTwo={TokenTwo1}
           setTokenTwo={setTokenTwo}
           output={outputAmount}
+          Loading={Loading}
           setTokenTwoValue={setTokenTwoValue}
           SetOpenToken2={setOpenToken2}
         />

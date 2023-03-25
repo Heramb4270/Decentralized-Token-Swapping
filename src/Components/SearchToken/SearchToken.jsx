@@ -34,17 +34,14 @@ function SearchToken({ openToken, tokens, tokenData, coin, SwapPrice }) {
               key={i + 1}
               className={
                 active == i + 1
-                  ? `flex items-center gap-1 bg-[#D01257] border-[#D01257] border-2 p-[.3rem] rounded-lg cursor-pointer`
-                  : `group flex items-center gap-1 border-[#D01257] border-2 p-[.3rem] rounded-lg cursor-pointer transition-all hover:bg-gradient-to-r from-white to-slate-200 hover:text-black hover:border-black icon`
+                  ? `flex items-center gap-1 text-sm bg-[#D01257] border-[#D01257] border-2 py-[.3rem] px-[.6rem] rounded-lg cursor-pointer`
+                  : `group flex items-center gap-1 text-sm border-[#D01257] border-hidden border-2 py-[5.8px] px-[.7rem] rounded-lg cursor-pointer transition-all hover:bg-[#24254e] icon`
               }
               onClick={() => (
                 setActive(i + 1), tokens({ name: el.name, image: el.img })
               )}
             >
-              <img
-                src={el.img || Icons.dai}
-                className="w-6 h-6 group-hover:invert"
-              />
+              <img src={el.img || Icons.dai} className="w-6 h-6" />
               {el.name}
             </button>
           ))}
