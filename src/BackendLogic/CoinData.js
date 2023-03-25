@@ -25,17 +25,13 @@ export const Coins_Token_1 = [
     name: "DAI",
   },
   {
-    img: Icons.eth,
-    name: "AVAX",
-  },
-  {
     img: Icons.matic,
     name: "WMATIC",
   },
-  {
-    img: Icons.usdc,
-    name: "USDC",
-  },
+  // {
+  //   img: Icons.usdc,
+  //   name: "USDC",
+  // },
   {
     img: Icons.avax,
     name: "AVAX",
@@ -62,10 +58,6 @@ export const Coins_Token_2 = [
   {
     img: Icons.dai,
     name: "DAI",
-  },
-  {
-    img: Icons.eth,
-    name: "AVAX",
   },
   {
     img: Icons.matic,
