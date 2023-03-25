@@ -1,5 +1,6 @@
 import { getPrice } from "./ProcessTransaction.js";
 import data from "./constants.js";
+import data2 from "./constants2.js";
 // import { ethers, BigNumber } from "ethers";
 // //import * as JSBI from "jsbi";
 // import { Token, CurrencyAmount, Percent, TradeType } from "@uniswap/sdk-core";
@@ -34,8 +35,8 @@ export const SwapPrice = async (
   provider
 ) => {
   console.log(inputAmount, slippageAmount, signerAddress, provider);
-  const InputToken = data[TokenOne1.name];
-  const OutputToken = data[TokenTwo1.name];
+  const InputToken = data2[TokenOne1.name];
+  const OutputToken = data2[TokenTwo1.name];
   console.log(InputToken);
   console.log(OutputToken);
   const swap = await getPrice(
