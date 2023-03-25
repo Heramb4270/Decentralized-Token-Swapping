@@ -1,8 +1,8 @@
-import { AlphaRouter, SwapType } from "@uniswap/smart-order-router";
-import ERC20ABI from "./abi.js";
 import { ethers, BigNumber } from "ethers";
 import JSBI from "jsbi";
-import { CurrencyAmount, Percent, TradeType } from "@uniswap/sdk-core";
+const QuoterAddress = "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
+import { abi as QuoterAbi } from "@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json";
+
 function fromReadableAmount(amount, decimals) {
   const extraDigits = Math.pow(10, countDecimals(amount));
   const adjustedAmount = amount * extraDigits;
@@ -14,9 +14,7 @@ function fromReadableAmount(amount, decimals) {
     JSBI.BigInt(extraDigits)
   );
 }
-const INFURA_URL_POLYGON =
-  "https://polygon-mainnet.g.alchemy.com/v2/E99oxEOcJm44pEwe6g7W0tKlkyfJN7RM";
-const provider = new ethers.providers.JsonRpcProvider(INFURA_URL_POLYGON);
+
 function countDecimals(x) {
   if (Math.floor(x) === x) {
     return 0;
@@ -24,6 +22,15 @@ function countDecimals(x) {
   return x.toString().split(".")[1].length || 0;
 }
 
+///////////////////////////////////
+const INFURA_URL_POLYGON =
+  "https://polygon-mainnet.g.alchemy.com/v2/E99oxEOcJm44pEwe6g7W0tKlkyfJN7RM";
+const provider = new ethers.providers.JsonRpcProvider(INFURA_URL_POLYGON);
+
+const fee = 3000;
+const sqrtPriceLimitX96 = 0;
+const quoter = new ethers.Contract(QuoterAddress, QuoterAbi, provider);
+///////////////////////////////////////////////////
 export const getPrice = async (
   inputAmount,
   slippageAmount,
@@ -33,33 +40,51 @@ export const getPrice = async (
   OutputToken,
   provider1
 ) => {
-  const chainId = 137;
+  // const chainId = 137;
+  // console.log(InputToken);
+  // console.log(OutputToken);
+  // const router = new AlphaRouter({
+  //   chainId: chainId,
+  //   provider: provider,
+  // });
+  const inputAmount1 = fromReadableAmount(
+    parseInt(inputAmount),
+    InputToken.decimals
+  ).toString();
 
-  const router = new AlphaRouter({
-    chainId: chainId,
-    provider: provider,
-  });
-  const inputAmount1 = CurrencyAmount.fromRawAmount(
-    InputToken,
-    fromReadableAmount(parseInt(inputAmount), 18).toString()
-  );
   try {
-    const route = await router.route(
+    const AmountOut = await quoter.callStatic.quoteExactInputSingle(
+      InputToken.address,
+      OutputToken.address,
+      fee,
       inputAmount1,
-      OutputToken,
-      TradeType.EXACT_INPUT,
-      {
-        recipient: "0x1011c406c12bcaa0d5ace89529012e8d44a3e623",
-        slippageTolerance: new Percent(15, 100), // .5%
-        deadline: Math.floor(Date.now() / 1000 + 1800),
-        type: SwapType.SWAP_ROUTER_02,
-      }
+      sqrtPriceLimitX96
     );
-    console.log(route);
 
-    console.log(` Price for ${inputAmount}  is ${route.quote.toFixed(6)}`);
+    const FinalAmount = ethers.utils.formatUnits(
+      AmountOut.toString(),
+      OutputToken.decimals
+    );
 
-    if (route !== null) {
+    // const route = await router.route(
+    //   inputAmount1,
+    //   OutputToken,
+    //   TradeType.EXACT_INPUT,
+    //   {
+    //     recipient: "0x1011c406c12bcaa0d5ace89529012e8d44a3e623",
+    //     slippageTolerance: new Percent(15, 100), // .5%
+    //     deadline: Math.floor(Date.now() / 1000 + 1800),
+    //     type: SwapType.SWAP_ROUTER_02,
+    //   }
+
+    // );
+    // console.log(route);
+    //
+
+    // )
+    //console.log(` Price for ${inputAmount}  is ${route.quote.toFixed(6)}`);
+
+    if (FinalAmount !== null) {
       // BigNumber.from(ethers.utils.parseUnits("200000", "gwei"));
 
       // const contract0 = new ethers.Contract(address0, ERC20ABI, web3Provider);
@@ -88,10 +113,10 @@ export const getPrice = async (
 
       // const res3 = await res2.wait();
       // console.log(res3);
-      const quoteAmountOut = route.quote.toFixed(6);
-      const ratio = (inputAmount / quoteAmountOut).toFixed(3);
+      //   const quoteAmountOut = route.quote.toFixed(6);
+      const ratio = (parseInt(inputAmount) / FinalAmount).toFixed(3);
 
-      return [quoteAmountOut, ratio];
+      return [FinalAmount, ratio];
     } else {
       throw new Error("Transaction Failed");
     }
