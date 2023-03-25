@@ -12,7 +12,7 @@ function NavBar_Right(props) {
       {/* NAVABAR RIGHT BOX  */}
       <div className="flex items-center gap-4 bg-[#40418d] bg-[#D01257] text-white px-3 py-3 rounded-full cursor-pointer uppercase">
         {/* IMAGE NETWORK  */}
-        <img src={Icons.eth} className="w-6 h-6" />
+        <img src={Icons.matic} className="w-6 h-6" />
         <p>Polygon</p>
       </div>
       {/* ADDRESS BUTTON  */}
