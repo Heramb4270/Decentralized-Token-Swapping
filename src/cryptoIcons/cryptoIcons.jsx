@@ -7,6 +7,8 @@ import uni from "./svg/uni.svg";
 import usd from "./svg/usd.svg";
 import usdc from "./svg/usdc.svg";
 import usdt from "./svg/usdt.svg";
+import shib from "./svg/shib.svg";
+import btc from "./svg/btc.svg";
 
 export default {
   matic,
@@ -17,6 +19,8 @@ export default {
   usd,
   usdc,
   usdt,
+  shib,
+  btc,
 };
 
 // export function Matic({ size = 32 }) {
