@@ -1,4 +1,5 @@
 import { getPrice } from "./ProcessTransaction.js";
+import getPrice2 from "./ProcessTrans.js";
 import data from "./constants.js";
 import data2 from "./constants2.js";
 // import { ethers, BigNumber } from "ethers";
@@ -49,6 +50,20 @@ export const SwapPrice = async (
     provider
   );
   console.log(swap);
+  if (swap === undefined) {
+    const InputToken2 = data[TokenOne1.name];
+    const OutputToken2 = data[TokenTwo1.name];
+    const swap2 = await getPrice2(
+      inputAmount,
+      slippageAmount,
+      Math.floor(Date.now() / 1000 + parseInt(deadlineMinutes) * 60),
+      signerAddress,
+      InputToken2,
+      OutputToken2
+    );
+    console.log(swap2);
+    return swap2;
+  }
   return swap;
 
   //   setTransaction(swap[0]);

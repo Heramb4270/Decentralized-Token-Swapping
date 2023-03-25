@@ -14,7 +14,7 @@ function HeroSection(props) {
   const [openToken1, setOpenToken1] = useState(false);
   const [openToken2, setOpenToken2] = useState(false);
   const [inputAmount, setInputAmount] = useState();
-  const [outputAmount, setOutputAmount] = useState();
+  const [outputAmount, setOutputAmount] = useState(0);
   const [slippageAmount, setSlippageAmount] = useState(2);
   const [deadlineMinutes, setDeadlineMinutes] = useState(10);
   const [Loading, setLoading] = useState(false);
@@ -37,7 +37,10 @@ function HeroSection(props) {
     image: "",
   });
   useEffect(() => {
-    GettingQuotes();
+    console.log(TokenOne1, TokenTwo1);
+    if (TokenOneValue > 0) {
+      GettingQuotes();
+    }
   }, [TokenOne1, TokenTwo1]);
   const GettingQuotes = async (
     inputAmount1 = inputAmount,
@@ -49,6 +52,8 @@ function HeroSection(props) {
     provider = props.provider
   ) => {
     setLoading(true);
+
+    setOutputAmount(0);
     setInputAmount(inputAmount1);
     const resData = await SwapPrice(
       inputAmount1,
@@ -59,7 +64,13 @@ function HeroSection(props) {
       Token2,
       provider
     );
-    setOutputAmount(resData[0]);
+    const outputamt = resData[0].substring(0, 10);
+    // c
+    if (outputamt < 0.0000001) {
+      setOutputAmount("<0.0000001");
+    } else {
+      setOutputAmount(resData[0].substring(0, 8));
+    }
     console.log(resData[0]);
 
     setRatio(resData[1]);
@@ -83,7 +94,6 @@ function HeroSection(props) {
         </div>
         {/* HEROSECTION INPUT  */}
         {/* TOKEN ONE  */}
-
         <TokenOne
           SwapPrice={GettingQuotes}
           TokenOne={TokenOne1}
@@ -93,17 +103,23 @@ function HeroSection(props) {
           SetOpenToken1={setOpenToken1}
         />
 
+        {/* <TokenPriceInUsd
+          TokenOne={TokenOne1}
+          SwapPrice={GettingQuotes}
+          inputAmount={inputAmount}
+        /> */}
         {/* TOKEN TWO */}
-
         <TokenTwo
           inputAmount={inputAmount}
           TokenTwo={TokenTwo1}
           setTokenTwo={setTokenTwo}
           output={outputAmount}
+          setOutputAmount={setOutputAmount}
           Loading={Loading}
           setTokenTwoValue={setTokenTwoValue}
           SetOpenToken2={setOpenToken2}
         />
+        {/* {outputAmount > 0 && <TokenPriceInUsd />} */}
         {props.isConnected() ? (
           <SwapButton connected={true} getSigner={props.getSigner} />
         ) : (
