@@ -2,7 +2,7 @@ import { ethers, BigNumber } from "ethers";
 import JSBI from "jsbi";
 const QuoterAddress = "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6";
 import { abi as QuoterAbi } from "@uniswap/v3-periphery/artifacts/contracts/lens/Quoter.sol/Quoter.json";
-
+import { FeeAmount } from "@uniswap/v3-sdk";
 function fromReadableAmount(amount, decimals) {
   const extraDigits = Math.pow(10, countDecimals(amount));
   const adjustedAmount = amount * extraDigits;
@@ -27,7 +27,6 @@ const INFURA_URL_POLYGON =
   "https://polygon-mainnet.g.alchemy.com/v2/E99oxEOcJm44pEwe6g7W0tKlkyfJN7RM";
 const provider = new ethers.providers.JsonRpcProvider(INFURA_URL_POLYGON);
 
-const fee = 3000;
 const sqrtPriceLimitX96 = 0;
 const quoter = new ethers.Contract(QuoterAddress, QuoterAbi, provider);
 ///////////////////////////////////////////////////
@@ -48,15 +47,15 @@ export const getPrice = async (
   //   provider: provider,
   // });
   const inputAmount1 = fromReadableAmount(
-    parseInt(inputAmount),
+    Number(inputAmount),
     InputToken.decimals
   ).toString();
-
+  console.log(inputAmount1);
   try {
     const AmountOut = await quoter.callStatic.quoteExactInputSingle(
       InputToken.address,
       OutputToken.address,
-      fee,
+      FeeAmount.MEDIUM,
       inputAmount1,
       sqrtPriceLimitX96
     );

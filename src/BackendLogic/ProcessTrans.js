@@ -37,7 +37,7 @@ function countDecimals(x) {
   return x.toString().split(".")[1].length || 0;
 }
 
-export default getPrice = async (
+const getPrice2 = async (
   inputAmount,
   slippageAmount,
   deadline,
@@ -45,10 +45,10 @@ export default getPrice = async (
   InputToken,
   OutputToken
 ) => {
-  const percentSlippage = new Percent(slippageAmount, 100);
+  const percentSlippage = new Percent(10, 100);
   const InputAmout = CurrencyAmount.fromRawAmount(
     InputToken,
-    fromReadableAmount(inputAmount, 18).toString()
+    fromReadableAmount(Number(inputAmount), 18).toString()
   );
 
   const route = await router.route(
@@ -63,21 +63,21 @@ export default getPrice = async (
     }
   );
   console.log(route);
-  const transaction = {
-    data: route.methodParameters.calldata,
-    to: V3_SWAP_ROUTER_ADDRESS,
-    value: BigNumber.from(route.methodParameters.value),
-    from: walletAddress,
-    gasPrice: BigNumber.from(route.gasPriceWei),
-    gasLimit: 60000,
-  };
+  // const transaction = {
+  //   data: route.methodParameters.calldata,
+  //   to: V3_SWAP_ROUTER_ADDRESS,
+  //   value: BigNumber.from(route.methodParameters.value),
+  //   from: walletAddress,
+  //   gasPrice: BigNumber.from(route.gasPriceWei),
+  //   gasLimit: 60000,
+  // };
 
   const quoteAmountOut = route.quote.toFixed(6);
   const ratio = (inputAmount / quoteAmountOut).toFixed(3);
 
-  return [transaction, quoteAmountOut, ratio];
+  return [quoteAmountOut, ratio];
 };
-
+export default getPrice2;
 // const runSwap = async (transaction, signer) => {
 //   const approvalAmount = ethers.utils.parseUnits("0.3", 18).toString();
 //   const contract0 = getWethContract();
