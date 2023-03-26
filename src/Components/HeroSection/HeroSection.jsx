@@ -6,8 +6,8 @@ import { TiCog } from "react-icons/ti";
 import { Coins_Token_1, Coins_Token_2 } from "../../BackendLogic/CoinData";
 import TokenOne from "./TokenOne";
 import TokenTwo from "./TokenTwo";
-import data2 from "./../../BackendLogic/constants2.js";
 import SwapPrice from "./../../BackendLogic/GetSwapPrice.js";
+import SwapPrice2 from "../../BackendLogic/GetPriceInUsd";
 import {
   getTokenContract1,
   getTokenContract2,
@@ -30,7 +30,7 @@ function HeroSection(props) {
   const [Token2Contract, setToken2Contract] = useState(undefined);
   const [Token1Balance, setToken1Balance] = useState(undefined);
   const [Token2Balance, setToken2Balance] = useState(undefined);
-
+  const [PriceinUsd, SetPriceinUsd] = useState(0);
   //TOKEN 1
   const [TokenOneValue, setTokenOneValue] = useState();
   const [TokenTwoValue, setTokenTwoValue] = useState();
@@ -73,6 +73,7 @@ function HeroSection(props) {
             props.signerAddress,
             TokenTwo1
           );
+          setToken1Balance(TokenOneBalance);
           setToken2Balance(TokenTwoBalance);
           console.log(TokenTwoBalance);
           setToken1Contract(TokenOneContract);
@@ -83,7 +84,11 @@ function HeroSection(props) {
 
     onLoad();
   }, [TokenOne1, TokenTwo1]);
-
+  useEffect(() => {
+    if (TokenOne1.name !== "" && TokenTwo1.name !== "") {
+      GetPriceInUSD();
+    }
+  }, [inputAmount, TokenTwo1, TokenOne1]);
   const GettingQuotes = async (
     inputAmount1 = inputAmount,
     slippageAmt = slippageAmount,
@@ -120,6 +125,18 @@ function HeroSection(props) {
     setLoading(false);
   };
 
+  const GetPriceInUSD = async () => {
+    const output_amt = await SwapPrice(
+      TokenOneValue,
+      slippageAmount,
+      deadlineMinutes,
+      props.signerAddress,
+      TokenOne1,
+      { name: "USDC" },
+      props.provider
+    );
+    SetPriceinUsd(output_amt[0].substring(0, 7));
+  };
   return (
     // HEROSECTION text-[#18122B]
     <div className="my-auto flex items-center justify-center relative text-white">
@@ -146,8 +163,8 @@ function HeroSection(props) {
         />
 
         <div className="flex items-center justify-between mx-4 my-3 mb-7 font-normal opacity-70 text-white">
-          <p>$455</p>
-          <p>Balance: $566</p>
+          <p>${PriceinUsd}</p>
+          <p>Balance: {Token1Balance}</p>
         </div>
         {/* <TokenPriceInUsd
           TokenOne={TokenOne1}
@@ -167,8 +184,8 @@ function HeroSection(props) {
         />
 
         <div className="flex items-center justify-between mx-4 my-3 font-normal opacity-70 text-white">
-          <p>$455</p>
-          <p>Balance: $566</p>
+          <p>${PriceinUsd}</p>
+          <p>Balance: {Token2Balance}</p>
         </div>
         {/* {outputAmount > 0 && <TokenPriceInUsd />} */}
         {props.isConnected() ? (

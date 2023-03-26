@@ -26,5 +26,5 @@ export const getBalance = async (TokenContract, address, Token) => {
     balance.toString(),
     decimals
   );
-  return FormatedBalance.substring(0, 4);
+  return FormatedBalance.substring(0, 8);
 };
