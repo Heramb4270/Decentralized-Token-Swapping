@@ -145,6 +145,10 @@ function HeroSection(props) {
           SetOpenToken1={setOpenToken1}
         />
 
+        <div className="flex items-center justify-between mx-4 my-3 mb-7 font-normal opacity-70 text-white">
+          <p>$455</p>
+          <p>Balance: $566</p>
+        </div>
         {/* <TokenPriceInUsd
           TokenOne={TokenOne1}
           SwapPrice={GettingQuotes}
@@ -161,6 +165,11 @@ function HeroSection(props) {
           setTokenTwoValue={setTokenTwoValue}
           SetOpenToken2={setOpenToken2}
         />
+
+        <div className="flex items-center justify-between mx-4 my-3 font-normal opacity-70 text-white">
+          <p>$455</p>
+          <p>Balance: $566</p>
+        </div>
         {/* {outputAmount > 0 && <TokenPriceInUsd />} */}
         {props.isConnected() ? (
           <SwapButton connected={true} getSigner={props.getSigner} />
