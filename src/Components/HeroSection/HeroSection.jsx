@@ -6,7 +6,13 @@ import { TiCog } from "react-icons/ti";
 import { Coins_Token_1, Coins_Token_2 } from "../../BackendLogic/CoinData";
 import TokenOne from "./TokenOne";
 import TokenTwo from "./TokenTwo";
+import data2 from "./../../BackendLogic/constants2.js";
 import SwapPrice from "./../../BackendLogic/GetSwapPrice.js";
+import {
+  getTokenContract1,
+  getTokenContract2,
+  getBalance,
+} from "./../../BackendLogic/GetBalanceOfTokens.js";
 // import {AlphaRouter} from "../../BackendLogic/AlphaRouter"
 function HeroSection(props) {
   //USESTATE
@@ -20,6 +26,11 @@ function HeroSection(props) {
   const [Loading, setLoading] = useState(false);
   const [transaction, setTransaction] = useState(undefined);
   const [ratio, setRatio] = useState(undefined);
+  const [Token1Contract, setToken1Contract] = useState(undefined);
+  const [Token2Contract, setToken2Contract] = useState(undefined);
+  const [Token1Balance, setToken1Balance] = useState(undefined);
+  const [Token2Balance, setToken2Balance] = useState(undefined);
+
   //TOKEN 1
   const [TokenOneValue, setTokenOneValue] = useState();
   const [TokenTwoValue, setTokenTwoValue] = useState();
@@ -38,10 +49,41 @@ function HeroSection(props) {
   });
   useEffect(() => {
     console.log(TokenOne1, TokenTwo1);
-    if (TokenOneValue > 0) {
-      GettingQuotes();
+    async function onLoad() {
+      if (TokenOneValue > 0) {
+        await GettingQuotes();
+      }
+      if (!Loading) {
+        if (TokenOne1.name !== "" && TokenTwo1.name !== "") {
+          const TokenOneContract = getTokenContract1(TokenOne1);
+          console.log(Token1Contract);
+          const TokenTwoContract = getTokenContract2(TokenTwo1);
+          console.log(Token2Contract);
+
+          const TokenOneBalance = await getBalance(
+            TokenOneContract,
+            props.signerAddress,
+            TokenOne1
+          );
+          setToken1Balance(Token1Balance);
+          console.log(TokenOneBalance);
+
+          const TokenTwoBalance = await getBalance(
+            TokenTwoContract,
+            props.signerAddress,
+            TokenTwo1
+          );
+          setToken2Balance(TokenTwoBalance);
+          console.log(TokenTwoBalance);
+          setToken1Contract(TokenOneContract);
+          setToken2Contract(TokenTwoContract);
+        }
+      }
     }
+
+    onLoad();
   }, [TokenOne1, TokenTwo1]);
+
   const GettingQuotes = async (
     inputAmount1 = inputAmount,
     slippageAmt = slippageAmount,

@@ -6,7 +6,25 @@ const INFURA_URL_POLYGON =
 console.log(INFURA_URL_POLYGON);
 const provider = new ethers.providers.JsonRpcProvider(INFURA_URL_POLYGON);
 
-export const getTokenContract = (Token1) => {
-  const address = data2[Token1.name];
-  return new ethers.Contract(address, ERC20ABI, provider);
+export const getTokenContract1 = (Token) => {
+  const address = data2[Token.name].address;
+  console.log(address);
+  const ContractOfToken = new ethers.Contract(address, ERC20ABI, provider);
+  return ContractOfToken;
+};
+export const getTokenContract2 = (Token) => {
+  const address = data2[Token.name].address;
+  console.log(address);
+  const ContractOfToken = new ethers.Contract(address, ERC20ABI, provider);
+  return ContractOfToken;
+};
+export const getBalance = async (TokenContract, address, Token) => {
+  const balance = await TokenContract.balanceOf(address);
+  const decimals = data2[Token.name].decimals;
+
+  const FormatedBalance = ethers.utils.formatUnits(
+    balance.toString(),
+    decimals
+  );
+  return FormatedBalance.substring(0, 4);
 };

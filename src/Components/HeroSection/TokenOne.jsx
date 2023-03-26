@@ -6,8 +6,10 @@ function TokenOne(props) {
         type="text"
         placeholder="0"
         onBlur={(e) => {
-          props.setTokenOneValue(e.target.value),
-            props.SwapPrice(e.target.value);
+          if (e.target.value > 0) {
+            props.setTokenOneValue(e.target.value),
+              props.SwapPrice(e.target.value);
+          }
         }}
         className="input-two placeholder:text-[#ffffff]"
       />
