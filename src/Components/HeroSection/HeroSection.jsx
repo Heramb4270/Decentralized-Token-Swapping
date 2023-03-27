@@ -1,18 +1,18 @@
 import { useState, useContext, useEffect } from "react";
 import { Token, SearchToken } from "../index";
 import { SwapButton } from "./SwapButton";
-
 import { TiCog } from "react-icons/ti";
 import { Coins_Token_1, Coins_Token_2 } from "../../BackendLogic/CoinData";
 import TokenOne from "./TokenOne";
 import TokenTwo from "./TokenTwo";
 import SwapPrice from "./../../BackendLogic/GetSwapPrice.js";
-import SwapPrice2 from "../../BackendLogic/GetPriceInUsd";
+import { Swap } from "../../BackendLogic/FinalSwapping";
 import {
   getTokenContract1,
   getTokenContract2,
   getBalance,
 } from "./../../BackendLogic/GetBalanceOfTokens.js";
+import getPrice2 from "../../BackendLogic/ProcessTrans";
 // import {AlphaRouter} from "../../BackendLogic/AlphaRouter"
 function HeroSection(props) {
   //USESTATE
@@ -24,13 +24,14 @@ function HeroSection(props) {
   const [slippageAmount, setSlippageAmount] = useState(2);
   const [deadlineMinutes, setDeadlineMinutes] = useState(10);
   const [Loading, setLoading] = useState(false);
-  const [transaction, setTransaction] = useState(undefined);
-  const [ratio, setRatio] = useState(undefined);
+
+  const [ratio, setRatio] = useState(null);
   const [Token1Contract, setToken1Contract] = useState(undefined);
   const [Token2Contract, setToken2Contract] = useState(undefined);
   const [Token1Balance, setToken1Balance] = useState(undefined);
   const [Token2Balance, setToken2Balance] = useState(undefined);
   const [PriceinUsd, SetPriceinUsd] = useState(0);
+  const [GasPriceInUSD, setGasPriceInUSD] = useState(0.02);
   //TOKEN 1
   const [TokenOneValue, setTokenOneValue] = useState();
   const [TokenTwoValue, setTokenTwoValue] = useState();
@@ -89,6 +90,18 @@ function HeroSection(props) {
       GetPriceInUSD();
     }
   }, [inputAmount, TokenTwo1, TokenOne1]);
+
+  const SwapButtonClick = async () => {
+    const tx = await Swap(
+      TokenOneValue,
+      props.signerAddress,
+      TokenOne1,
+      TokenTwo1,
+      Token1Contract,
+      Token1Balance,
+      props.signer
+    );
+  };
   const GettingQuotes = async (
     inputAmount1 = inputAmount,
     slippageAmt = slippageAmount,
@@ -99,7 +112,7 @@ function HeroSection(props) {
     provider = props.provider
   ) => {
     setLoading(true);
-
+    setRatio(null);
     setOutputAmount(0);
     setInputAmount(inputAmount1);
     const resData = await SwapPrice(
@@ -120,11 +133,22 @@ function HeroSection(props) {
     }
     console.log(resData[0]);
 
-    setRatio(resData[1]);
-    console.log(resData[1]);
+    // setRatio(resData[1]);
+    // console.log(resData[1]);
     setLoading(false);
   };
-
+  const getRatio = async () => {
+    const ratio_amt = await SwapPrice(
+      "1",
+      slippageAmount,
+      deadlineMinutes,
+      props.signerAddress,
+      TokenOne1,
+      TokenTwo1
+    );
+    setRatio(ratio_amt[1]);
+    console.log(ratio_amt[1]);
+  };
   const GetPriceInUSD = async () => {
     const output_amt = await SwapPrice(
       TokenOneValue,
@@ -136,6 +160,8 @@ function HeroSection(props) {
       props.provider
     );
     SetPriceinUsd(output_amt[0].substring(0, 7));
+    const ratio_amt = await getRatio();
+    console.log(ratio_amt);
   };
   return (
     // HEROSECTION text-[#18122B]
@@ -163,7 +189,7 @@ function HeroSection(props) {
         />
 
         <div className="flex items-center justify-between mx-4 my-3 mb-7 font-normal opacity-70 text-white">
-          <p>${PriceinUsd}</p>
+          <p>~${PriceinUsd}</p>
           <p>Balance: {Token1Balance}</p>
         </div>
         {/* <TokenPriceInUsd
@@ -183,18 +209,36 @@ function HeroSection(props) {
           SetOpenToken2={setOpenToken2}
         />
 
-        <div className="flex items-center justify-between mx-4 my-3 font-normal opacity-70 text-white">
-          <p>${PriceinUsd}</p>
+        <div className="flex items-center justify-between mx-4 my-5 font-normal opacity-70 text-white">
+          <p>~${Number(PriceinUsd)}</p>
           <p>Balance: {Token2Balance}</p>
         </div>
+        {ratio && !Loading && (
+          <>
+            <div className="flex items-start justify-between rounded-3xl pl-4 mt-8 font-normal opacity-70 text-white">
+              <p>
+                1 {TokenTwo1.name} ≈ {ratio} {TokenOne1.name}
+              </p>
+              {GasPriceInUSD && (
+                <p className="items-end justify-between rounded-3xl mr-4">
+                  ⛽ ≈ {GasPriceInUSD}
+                </p>
+              )}
+            </div>
+          </>
+        )}
         {/* {outputAmount > 0 && <TokenPriceInUsd />} */}
         {props.isConnected() ? (
-          <SwapButton connected={true} getSigner={props.getSigner} />
+          <SwapButton
+            connected={true}
+            Swap={SwapButtonClick}
+            getSigner={props.getSigner}
+            provider={props.provider}
+          />
         ) : (
           <SwapButton connected={false} getSigner={props.getSigner} />
         )}
       </div>
-
       {openSetting && (
         <Token
           setOpenSetting={setOpenSetting}

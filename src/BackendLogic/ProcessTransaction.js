@@ -36,8 +36,7 @@ export const getPrice = async (
   time,
   signerAddress,
   InputToken,
-  OutputToken,
-  provider1
+  OutputToken
 ) => {
   // const chainId = 137;
   // console.log(InputToken);

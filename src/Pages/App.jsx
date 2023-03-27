@@ -40,6 +40,7 @@ function App() {
         provider={provider}
         isConnected={isConnected}
         signerAddress={signerAddress}
+        signer={signer}
         getSigner={getSigner}
       />
     </div>

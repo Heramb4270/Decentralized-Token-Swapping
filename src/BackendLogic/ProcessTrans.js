@@ -1,5 +1,6 @@
 import { AlphaRouter, SwapType } from "@uniswap/smart-order-router";
 import { CurrencyAmount, TradeType, Percent } from "@uniswap/sdk-core";
+
 import { ethers, BigNumber } from "ethers";
 import JSBI from "jsbi";
 import ERC20ABI from "./abi";
@@ -36,7 +37,13 @@ function countDecimals(x) {
   }
   return x.toString().split(".")[1].length || 0;
 }
-
+//  "1",
+//    slippageAmount,
+//    deadlineMinutes,
+//    props.signerAddress,
+//    TokenOne1,
+//    TokenTwo1,
+//    props.provider;
 const getPrice2 = async (
   inputAmount,
   slippageAmount,
@@ -63,19 +70,20 @@ const getPrice2 = async (
     }
   );
   console.log(route);
-  // const transaction = {
-  //   data: route.methodParameters.calldata,
-  //   to: V3_SWAP_ROUTER_ADDRESS,
-  //   value: BigNumber.from(route.methodParameters.value),
-  //   from: walletAddress,
-  //   gasPrice: BigNumber.from(route.gasPriceWei),
-  //   gasLimit: 60000,
-  // };
+  const transaction = {
+    data: route.methodParameters.calldata,
+    to: "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
+    value: BigNumber.from(route.methodParameters.value),
+    from: walletAddress,
+    gasPrice: BigNumber.from(route.gasPriceWei),
+    gasLimit: 300000,
+  };
 
   const quoteAmountOut = route.quote.toFixed(6);
   const ratio = (inputAmount / quoteAmountOut).toFixed(3);
-
-  return [quoteAmountOut, ratio];
+  const PriceinUsd = route.estimatedGasUsedUSD.toFixed(4);
+  console.log("Price in USd ", PriceinUsd);
+  return [quoteAmountOut, ratio, PriceinUsd, transaction];
 };
 export default getPrice2;
 // const runSwap = async (transaction, signer) => {
