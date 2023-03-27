@@ -182,6 +182,7 @@ function HeroSection(props) {
         <TokenOne
           SwapPrice={GettingQuotes}
           TokenOne={TokenOne1}
+          TokenOneValue={TokenOneValue}
           TokenTwo={TokenTwo1}
           setTokenOne={setTokenOne}
           setTokenOneValue={setTokenOneValue}
