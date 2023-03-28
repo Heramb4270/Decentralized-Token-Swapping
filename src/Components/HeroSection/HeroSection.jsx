@@ -38,7 +38,7 @@ function HeroSection(props) {
   const [isClosable, setIsClosable] = useState(false);
   const [subject, setSubject] = useState("Work in Progress");
   const [message, setMessage] = useState(
-    "Please Wait until the metamask plugin pop up appears"
+    "Please Wait until the metamask plugin pop up appears..."
   );
   //TOKEN 1
   const [TokenOneValue, setTokenOneValue] = useState();
