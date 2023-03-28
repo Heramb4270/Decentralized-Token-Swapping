@@ -33,6 +33,13 @@ function HeroSection(props) {
   const [Token2Balance, setToken2Balance] = useState(undefined);
   const [PriceinUsd, SetPriceinUsd] = useState(0);
   const [GasPriceInUSD, setGasPriceInUSD] = useState(0.02);
+  const [openMessageModel, setOpenMessageModel] = useState(false);
+  const [transactionHash, setTransactionHash] = useState(undefined);
+  const [isClosable, setIsClosable] = useState(false);
+  const [subject, setSubject] = useState("Work in Progress");
+  const [message, setMessage] = useState(
+    "Please Wait until the metamask plugin pop up appears"
+  );
   //TOKEN 1
   const [TokenOneValue, setTokenOneValue] = useState();
   const [TokenTwoValue, setTokenTwoValue] = useState();
@@ -100,7 +107,11 @@ function HeroSection(props) {
       TokenTwo1,
       Token1Contract,
       Token1Balance,
-      props.signer
+      props.signer,
+      setOpenMessageModel,
+      setIsClosable,
+      setSubject,
+      setMessage
     );
   };
   const GettingQuotes = async (
@@ -239,6 +250,7 @@ function HeroSection(props) {
             Swap={SwapButtonClick}
             getSigner={props.getSigner}
             provider={props.provider}
+            openMessage={setOpenMessageModel}
           />
         ) : (
           <SwapButton connected={false} getSigner={props.getSigner} />
@@ -251,7 +263,6 @@ function HeroSection(props) {
           setDeadlineMinutes={setDeadlineMinutes}
         />
       )}
-
       {openToken1 && (
         <SearchToken
           inputAmount={inputAmount}
@@ -261,7 +272,6 @@ function HeroSection(props) {
           tokenData="Token1"
         />
       )}
-
       {openToken2 && (
         <SearchToken
           inputAmount={inputAmount}
@@ -271,11 +281,13 @@ function HeroSection(props) {
           tokenData="Token2"
         />
       )}
-      {/* <MessageModal
-        isClosable={false}
-        subject="Work in Progress"
-        message="Please Wait until the metamask plugin pop up appears"
-      /> */}
+      {openMessageModel && (
+        <MessageModal
+          isClosable={isClosable}
+          subject={subject}
+          message={message}
+        />
+      )}
     </div>
   );
 }

@@ -35,10 +35,14 @@ export const Swap = async (
   InputTokenContract,
   Balance,
   signer,
-  receiptx
+  setOpenMessageModel,
+  setIsClosable,
+  setSubject,
+  setMessage
 ) => {
   const InputToken1 = data[InputToken.name];
   const OutputToken1 = data[OutputToken.name];
+  setOpenMessageModel(true);
   console.log(inputAmount1, Balance);
   if (Number(inputAmount1) < Number(Balance)) {
     const InputAmout = CurrencyAmount.fromRawAmount(
@@ -59,6 +63,7 @@ export const Swap = async (
       }
     );
     if (route !== null) {
+      setOpenMessageModel(false);
       const contract0 = await InputTokenContract.connect(signer).approve(
         "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
         fromReadableAmount(Number(inputAmount1), 18).toString(),
@@ -66,7 +71,12 @@ export const Swap = async (
           gasPrice: BigNumber.from(route.gasPriceWei),
         }
       );
-
+      setIsClosable(true);
+      setMessage(
+        "Transaction is In Proccess You Will Get Transaction Hash Soon !!!"
+      );
+      setSubject("Transaction is being Booked in A Block !!!");
+      setOpenMessageModel(true);
       const transaction = {
         data: route.methodParameters.calldata,
         to: "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
@@ -92,7 +102,11 @@ export const Swap = async (
           break;
         }
       }
-      receiptx = receipt;
+      setOpenMessageModel(false);
+      setMessage(
+        `Trasaction Hash : ${receipt.transactionHash}\n You Can View Your Transaction on Polygon Network`
+      );
+      setOpenMessageModel(true);
       console.log(receipt.transactionHash);
       //   const response = await provider.send(transaction);
 

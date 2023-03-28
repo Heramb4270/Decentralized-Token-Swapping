@@ -6,17 +6,17 @@ function TokenOne(props) {
   const ref = useRef(null);
   const refimg = useRef(null);
 
-  const clearField = () => {
-    // refimg.current.src = Icons.eth;
-    ref.current.value = "";
-  };
+  // const clearField = () => {
+  //   // refimg.current.src = Icons.eth;
+  //   ref.current.value = "";
+  // };
 
-  props.isConnected() && clearField();
+  //props.isConnected() && clearField();
 
   return (
     <div className="flex items-center justify-between rounded-3xl pl-8 mt-4 border-[1.5px] border-[#001438]">
       <input
-        ref={ref}
+        //  ref={ref}
         type="text"
         placeholder="0"
         onBlur={(e) => {
