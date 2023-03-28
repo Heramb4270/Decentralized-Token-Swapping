@@ -6,7 +6,7 @@ function Token(props) {
   return (
     <>
       {/* <Token2 setOpenSetting={props.setOpenSetting} /> */}
-      <div className="Model fixed bg-[] inset-0 grid place-content-center justify-center min-h-screen z-30">
+      <div className="Model effect-fade-in fixed bg-[] inset-0 grid place-content-center justify-center min-h-screen z-30">
         <div className="blurry-bg"></div>
         <div className="Model_box bg-[#0F1021] ring-[#ff1c6f] ring-2 p-8 rounded-lg shadow-2xl">
           {/* TOKEN BOX  */}

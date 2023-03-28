@@ -34,10 +34,10 @@ export const Swap = async (
   OutputToken,
   InputTokenContract,
   Balance,
-  signer
+  signer,
+  receiptx
 ) => {
   const InputToken1 = data[InputToken.name];
-
   const OutputToken1 = data[OutputToken.name];
   console.log(inputAmount1, Balance);
   if (Number(inputAmount1) < Number(Balance)) {
@@ -92,7 +92,7 @@ export const Swap = async (
           break;
         }
       }
-
+      receiptx = receipt;
       console.log(receipt.transactionHash);
       //   const response = await provider.send(transaction);
 
