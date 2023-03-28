@@ -99,6 +99,8 @@ export const Swap = async (
       //   const res3 = await response.wait();
       //   console.log(res3);
       // } else {
+    } else {
+      throw new Error("Error in Transaction");
     }
   } else {
     throw new Error("Low Balance");
