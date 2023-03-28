@@ -5,6 +5,7 @@ import { TiCog } from "react-icons/ti";
 import { Coins_Token_1, Coins_Token_2 } from "../../BackendLogic/CoinData";
 import TokenOne from "./TokenOne";
 import TokenTwo from "./TokenTwo";
+import MessageModal from "./MessageModal";
 import SwapPrice from "./../../BackendLogic/GetSwapPrice.js";
 import { Swap } from "../../BackendLogic/FinalSwapping";
 import {
@@ -163,6 +164,7 @@ function HeroSection(props) {
     const ratio_amt = await getRatio();
     console.log(ratio_amt);
   };
+
   return (
     // HEROSECTION text-[#18122B]
     <div className="my-auto flex items-center justify-center relative text-white">
@@ -184,6 +186,7 @@ function HeroSection(props) {
           TokenOne={TokenOne1}
           TokenOneValue={TokenOneValue}
           TokenTwo={TokenTwo1}
+          isConnected={props.isConnected}
           setTokenOne={setTokenOne}
           setTokenOneValue={setTokenOneValue}
           SetOpenToken1={setOpenToken1}
@@ -203,6 +206,7 @@ function HeroSection(props) {
           inputAmount={inputAmount}
           TokenTwo={TokenTwo1}
           setTokenTwo={setTokenTwo}
+          isConnected={props.isConnected}
           output={outputAmount}
           setOutputAmount={setOutputAmount}
           Loading={Loading}
@@ -267,6 +271,11 @@ function HeroSection(props) {
           tokenData="Token2"
         />
       )}
+      {/* <MessageModal
+        isClosable={false}
+        subject="Work in Progress"
+        message="Please Wait until the metamask plugin pop up appears"
+      /> */}
     </div>
   );
 }

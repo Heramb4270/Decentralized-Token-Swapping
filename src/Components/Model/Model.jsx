@@ -5,9 +5,12 @@ function Model(props) {
   // useStates
   const walletMenu = ["MetaMask", "Coinbase", "Wallet", "WalletConnect"];
   return (
-    <div className="Model absolute bg-[] inset-0 grid place-content-center justify-center max-h-screen max-w-full z-20">
+    <div className="Model effect-fade-in absolute inset-0 grid place-content-center justify-center max-h-screen max-w-full z-20">
       <div className="blurry-bg"></div>
-      <div className="Model_box bg-gradient-to-b from-[#000e29] to-[#04183d] ring-[#ff1c6f] ring-2 rounded-3xl shadow-2xl p-11">
+      <div
+        id="Modal-box"
+        className="Model_box bg-gradient-to-b from-[#000e29] to-[#04183d] ring-[#ff1c6f] ring-2 rounded-3xl shadow-2xl p-11"
+      >
         <div className="Model_Box_heading flex items-center justify-between">
           <p className="text-xl">Connect a wallet</p>
           <div>
