@@ -5,4 +5,14 @@ import SearchToken from "./SearchToken/SearchToken";
 import Toggle from "./Toggle/Toggle";
 import TokenList from "./TokenList/TokenList";
 import Token from "./Token/Token";
-export { HeroSection, Token, Model, NavBar, SearchToken, Toggle, TokenList };
+import ChatGpt from "./ChatGpt/ChatGpt";
+export {
+  HeroSection,
+  Token,
+  Model,
+  NavBar,
+  SearchToken,
+  Toggle,
+  TokenList,
+  ChatGpt,
+};

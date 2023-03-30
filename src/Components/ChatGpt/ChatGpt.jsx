@@ -1,21 +1,15 @@
 import { useState, useContext, useEffect } from "react";
 import { Token, SearchToken } from "../index";
-import { SwapButton } from "./SwapButton";
 import { TiCog } from "react-icons/ti";
 import { Coins_Token_1, Coins_Token_2 } from "../../BackendLogic/CoinData";
-import TokenOne from "./TokenOne";
-import TokenTwo from "./TokenTwo";
-import MessageModal from "./MessageModal";
+import TokenOne from "../HeroSection/TokenOne";
+import TokenTwo from "../HeroSection/TokenTwo";
+import MessageModal from "../HeroSection/MessageModal";
 import SwapPrice from "./../../BackendLogic/GetSwapPrice.js";
-import { Swap } from "../../BackendLogic/FinalSwapping";
-import {
-  getTokenContract1,
-  getTokenContract2,
-  getBalance,
-} from "./../../BackendLogic/GetBalanceOfTokens.js";
-import getPrice2 from "../../BackendLogic/ProcessTrans";
+import { ChatGpt2 } from "../../BackendLogic/ChatGptIntegration/ChatGpt2.js";
+import ChatGptSumbitButton from "./ChatGptSubmitButton";
 // import {AlphaRouter} from "../../BackendLogic/AlphaRouter"
-function HeroSection(props) {
+function ChatGpt(props) {
   //USESTATE
   const [openSetting, setOpenSetting] = useState(false);
   const [openToken1, setOpenToken1] = useState(false);
@@ -30,7 +24,7 @@ function HeroSection(props) {
   const [Token1Contract, setToken1Contract] = useState(undefined);
   const [Token2Contract, setToken2Contract] = useState(undefined);
   const [Token1Balance, setToken1Balance] = useState(undefined);
-  const [Token2Balance, setToken2Balance] = useState(undefined);
+
   const [PriceinUsd, SetPriceinUsd] = useState(0);
   const [GasPriceInUSD, setGasPriceInUSD] = useState(0.02);
   const [openMessageModel, setOpenMessageModel] = useState(false);
@@ -62,33 +56,6 @@ function HeroSection(props) {
       if (TokenOneValue > 0) {
         await GettingQuotes();
       }
-      if (!Loading) {
-        if (TokenOne1.name !== "" && TokenTwo1.name !== "") {
-          const TokenOneContract = getTokenContract1(TokenOne1);
-          console.log(Token1Contract);
-          const TokenTwoContract = getTokenContract2(TokenTwo1);
-          console.log(Token2Contract);
-
-          const TokenOneBalance = await getBalance(
-            TokenOneContract,
-            props.signerAddress,
-            TokenOne1
-          );
-          setToken1Balance(Token1Balance);
-          console.log(TokenOneBalance);
-
-          const TokenTwoBalance = await getBalance(
-            TokenTwoContract,
-            props.signerAddress,
-            TokenTwo1
-          );
-          setToken1Balance(TokenOneBalance);
-          setToken2Balance(TokenTwoBalance);
-          console.log(TokenTwoBalance);
-          setToken1Contract(TokenOneContract);
-          setToken2Contract(TokenTwoContract);
-        }
-      }
     }
 
     onLoad();
@@ -99,15 +66,13 @@ function HeroSection(props) {
     }
   }, [inputAmount, TokenTwo1, TokenOne1]);
 
-  const SwapButtonClick = async () => {
-    const tx = await Swap(
-      TokenOneValue,
-      props.signerAddress,
+  const AskChatGpt = async () => {
+    const tx = await ChatGpt2(
+      inputAmount,
+      outputAmount,
       TokenOne1,
       TokenTwo1,
-      Token1Contract,
-      Token1Balance,
-      props.signer,
+      PriceinUsd,
       setOpenMessageModel,
       setIsClosable,
       setSubject,
@@ -202,10 +167,8 @@ function HeroSection(props) {
           setTokenOneValue={setTokenOneValue}
           SetOpenToken1={setOpenToken1}
         />
-
         <div className="flex items-center justify-between mx-4 my-3 mb-7 font-normal opacity-70 text-white">
           <p>~${PriceinUsd}</p>
-          <p>Balance: {Token1Balance}</p>
         </div>
         {/* <TokenPriceInUsd
           TokenOne={TokenOne1}
@@ -224,10 +187,8 @@ function HeroSection(props) {
           setTokenTwoValue={setTokenTwoValue}
           SetOpenToken2={setOpenToken2}
         />
-
-        <div className="flex items-center justify-between mx-4 my-5 font-normal opacity-70 text-white">
-          <p>~${Number(PriceinUsd)}</p>
-          <p>Balance: {Token2Balance}</p>
+        <div className="flex items-center justify-between mx-4 my-3 mb-7 font-normal opacity-70 text-white">
+          <p>~${PriceinUsd}</p>
         </div>
         {ratio && !Loading && (
           <>
@@ -243,8 +204,13 @@ function HeroSection(props) {
             </div>
           </>
         )}
+        <ChatGptSumbitButton
+          Swap={AskChatGpt}
+          output={outputAmount}
+          input={TokenOneValue}
+        />
         {/* {outputAmount > 0 && <TokenPriceInUsd />} */}
-        {props.isConnected() ? (
+        {/* {props.isConnected() ? (
           <SwapButton
             connected={true}
             Swap={SwapButtonClick}
@@ -254,7 +220,7 @@ function HeroSection(props) {
           />
         ) : (
           <SwapButton connected={false} getSigner={props.getSigner} />
-        )}
+        )} */}
       </div>
       {openSetting && (
         <Token
@@ -292,4 +258,4 @@ function HeroSection(props) {
     </div>
   );
 }
-export default HeroSection;
+export default ChatGpt;

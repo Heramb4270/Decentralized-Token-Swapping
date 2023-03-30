@@ -1,8 +1,10 @@
 import { NavBar, HeroSection } from "../Components";
+import { ChatGpt } from "../Components";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 function App() {
   const [provider, setProvider] = useState(undefined);
+  const [ChatwithGpt, setChatWithGpt] = useState(false);
   const [signer, setSigner] = useState(undefined);
   const [signerAddress, setSignerAddress] = useState(undefined);
   useEffect(() => {
@@ -30,19 +32,36 @@ function App() {
   if (signer !== undefined) getWalletAddress();
   return (
     <div>
-      <NavBar
-        provider={provider}
-        isConnected={isConnected}
-        signerAddress={signerAddress}
-        getSigner={getSigner}
-      />
-      <HeroSection
-        provider={provider}
-        isConnected={isConnected}
-        signerAddress={signerAddress}
-        signer={signer}
-        getSigner={getSigner}
-      />
+      {ChatwithGpt && (
+        <>
+          <NavBar
+            renderGPT={setChatWithGpt}
+            provider={provider}
+            isConnected={isConnected}
+            signerAddress={signerAddress}
+            getSigner={getSigner}
+          />
+          <ChatGpt />
+        </>
+      )}
+      {!ChatwithGpt && (
+        <>
+          <NavBar
+            renderGPT={setChatWithGpt}
+            provider={provider}
+            isConnected={isConnected}
+            signerAddress={signerAddress}
+            getSigner={getSigner}
+          />
+          <HeroSection
+            provider={provider}
+            isConnected={isConnected}
+            signerAddress={signerAddress}
+            signer={signer}
+            getSigner={getSigner}
+          />
+        </>
+      )}
     </div>
   );
 }
