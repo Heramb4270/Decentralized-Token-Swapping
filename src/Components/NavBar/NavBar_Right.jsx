@@ -2,6 +2,7 @@ import { SiEthereum } from "react-icons/si";
 import { Model, TokenList } from "../index";
 import { useState } from "react";
 import Icons from "../../cryptoIcons/cryptoIcons";
+import MessageModal from "../HeroSection/MessageModal";
 
 function NavBar_Right(props) {
   const [openModel, setOpenModel] = useState(false);
@@ -15,6 +16,9 @@ function NavBar_Right(props) {
         <img src={Icons.matic} className="w-6 h-6" />
         <p>Polygon</p>
       </div>
+
+
+
       {/* ADDRESS BUTTON  */}
       {props.isConnected() ? (
         <div
@@ -34,7 +38,22 @@ function NavBar_Right(props) {
         >
           Connect
         </button>
-      )}
+      )
+      }
+
+      {
+        props.isConnected() &&
+        <MessageModal
+          subject={"DEX App"}
+          message={`
+            Login Successfull! 🥳 Now you can
+            start swaping tokens. Click Ok to 
+            continue.
+          `}
+          isClosable={true}
+        />
+      }
+
 
       {openModel && (
         <Model

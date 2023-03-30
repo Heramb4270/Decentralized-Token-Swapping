@@ -1,4 +1,5 @@
 import { NavBar, HeroSection } from "../Components";
+import Tokens from "../Pages/Tokens";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 function App() {
@@ -35,14 +36,15 @@ function App() {
         isConnected={isConnected}
         signerAddress={signerAddress}
         getSigner={getSigner}
-      />
+      />{/*
       <HeroSection
         provider={provider}
         isConnected={isConnected}
         signerAddress={signerAddress}
         signer={signer}
         getSigner={getSigner}
-      />
+      />*/}
+      <Tokens />
     </div>
   );
 }
