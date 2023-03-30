@@ -2,6 +2,7 @@ import { NavBar, HeroSection } from "../Components";
 import { ChatGpt } from "../Components";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
+import { AllTokens } from "../Components";
 function App() {
   const [provider, setProvider] = useState(undefined);
   const [ChatwithGpt, setChatWithGpt] = useState(false);
@@ -34,14 +35,15 @@ function App() {
     <div>
       {ChatwithGpt && (
         <>
-          <NavBar
+          {/* <NavBar
             renderGPT={setChatWithGpt}
             provider={provider}
             isConnected={isConnected}
             signerAddress={signerAddress}
             getSigner={getSigner}
           />
-          <ChatGpt />
+          <ChatGpt /> */}
+          <AllTokens></AllTokens>
         </>
       )}
       {!ChatwithGpt && (
