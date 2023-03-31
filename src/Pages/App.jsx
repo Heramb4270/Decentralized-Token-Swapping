@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { AllTokens } from "../Components";
 function App() {
   const [provider, setProvider] = useState(undefined);
-  const [ChatwithGpt, setChatWithGpt] = useState(false);
+  const [ChatwithGpt, setChatWithGpt] = useState(true);
   const [signer, setSigner] = useState(undefined);
   const [signerAddress, setSignerAddress] = useState(undefined);
   useEffect(() => {
@@ -35,15 +35,15 @@ function App() {
     <div>
       {ChatwithGpt && (
         <>
-          {/* <NavBar
+          <NavBar
             renderGPT={setChatWithGpt}
             provider={provider}
             isConnected={isConnected}
             signerAddress={signerAddress}
             getSigner={getSigner}
           />
-          <ChatGpt /> */}
-          <AllTokens></AllTokens>
+          <ChatGpt />
+          {/* <AllTokens></AllTokens> */}
         </>
       )}
       {!ChatwithGpt && (
