@@ -1,4 +1,3 @@
-import { HiX } from "react-icons/hi";
 import { useState } from "react";
 
 export default function MessageModal(props) {
@@ -20,7 +19,8 @@ export default function MessageModal(props) {
               {props.isClosable && (
                 <button
                   onClick={() => setMessageOpen(!messageOpen)}
-                  className="text-[#d1ceff] bg-[#D01257] px-[2rem] py-3 rounded-full cursor-pointer font-bold">
+                  className="text-[#d1ceff] bg-[#D01257] px-[2rem] py-3 rounded-full cursor-pointer font-bold"
+                >
                   Ok
                 </button>
               )}
@@ -30,5 +30,4 @@ export default function MessageModal(props) {
       </div>
     );
   }
-
 }

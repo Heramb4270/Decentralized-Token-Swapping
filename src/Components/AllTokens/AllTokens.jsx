@@ -2,6 +2,7 @@ import React from "react";
 import Icons from "../../cryptoIcons/cryptoIcons";
 
 function AllTokens({ allTokenList }) {
+  
   return (
     // <div className="AllTokens">
     //   <div className="AllTokensBox mx-4 bg-[#15162e]">
@@ -48,8 +49,9 @@ function AllTokens({ allTokenList }) {
     //     ))}
     //   </div>
     // </div>
-
     <table className="table-auto mt-5 bg-[#15162e] text-white shadow-lg ring-1 ring-[#D01257] rounded-xl border-[#D01257]">
+      {console.log(allTokenList())}
+
       <thead className="mb-4 border-b border-b-[#D01257]">
         <tr className="mx-6">
           <th className="px-6 py-4 items-center">#</th>
@@ -63,17 +65,19 @@ function AllTokens({ allTokenList }) {
       <tbody>
         {allTokenList.map((el, i) => (
           <tr>
-            <td className="px-12 py-4">{el.number}</td>
+            <td className="px-12 py-4">{i + 1}</td>
             <td className="px-6 py-2 items-center">
               <p className="flex items-center">
-                <img src={el.image} className="w-4 h-4 mx-2" />
-                <p>{el.name}</p> <p className="ml-1">{el.symbol}</p>
+                {/* <img src={el.image} className="w-4 h-4 mx-2" /> */}
+                <p>{el[i].name}</p> <p className="ml-1">{el[i].symbol}</p>
               </p>
             </td>
-            <td className="px-6 py-2 align">{el.change}</td>
-            <td className="px-6 py-2 align">{el.price}</td>
-            <td className="px-6 py-2 align">{el.tvl}</td>
-            <td className="px-6 py-2 align w-[4.5rem]">{el.volume}</td>
+            <td className="px-6 py-2 align">{el[i].changePercent24Hr}</td>
+            <td className="px-6 py-2 align">{el[i].priceUSD}</td>
+            <td className="px-6 py-2 align">{el[i].supply}</td>
+            <td className="px-6 py-2 align w-[4.5rem]">
+              {el[i].volumeUsd24Hr}
+            </td>
           </tr>
         ))}
       </tbody>

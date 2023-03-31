@@ -62,6 +62,7 @@ export const Swap = async (
         type: SwapType.SWAP_ROUTER_02,
       }
     );
+
     if (route !== null) {
       setOpenMessageModel(false);
       const contract0 = await InputTokenContract.connect(signer).approve(
@@ -103,11 +104,19 @@ export const Swap = async (
         }
       }
       setOpenMessageModel(false);
-      setMessage(
-        `Trasaction Hash : ${receipt.transactionHash}\n You Can View Your Transaction on Polygon Network`
-      );
+
+      if (receipt.status) {
+        setSubject("Transaction Succeded !!!!");
+        setMessage(
+          `Trasaction Hash : ${receipt.transactionHash}\n You Can View Your Transaction on Polygon Network`
+        );
+      } else {
+        setSubject("Transaction Failed !!!!");
+        setMessage(
+          `Trasaction Failed : ${receipt.transactionHash}\n You Can View Your Transaction on Polygon Network`
+        );
+      }
       setOpenMessageModel(true);
-      console.log(receipt.transactionHash);
       //   const response = await provider.send(transaction);
 
       //   const res3 = await response.wait();

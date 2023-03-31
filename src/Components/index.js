@@ -6,4 +6,16 @@ import Toggle from "./Toggle/Toggle";
 import TokenList from "./TokenList/TokenList";
 import Token from "./Token/Token";
 import AllTokens from "./AllTokens/AllTokens";
-export { HeroSection, Token, Model, NavBar, SearchToken, Toggle, TokenList, AllTokens };
+import ChatGpt from "./ChatGpt/ChatGpt";
+
+export {
+  HeroSection,
+  Token,
+  Model,
+  NavBar,
+  SearchToken,
+  Toggle,
+  TokenList,
+  ChatGpt,
+  AllTokens,
+};

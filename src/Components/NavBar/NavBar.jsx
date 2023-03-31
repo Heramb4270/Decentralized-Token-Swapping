@@ -25,7 +25,7 @@ function NavBar(props) {
       {/* NAVBAR BOX */}
       <div className="grid grid-cols-3 items-center justify-between gap-4">
         {/* NAVABAR LEFT */}
-        <NavBar_Left menuItem={menuItem} />
+        <NavBar_Left menuItem={menuItem} renderGPT={props.renderGPT} />
         {/* NAVABAR MIDDLE  */}
 
         <NavBar_Middle />

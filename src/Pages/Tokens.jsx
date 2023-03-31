@@ -4,6 +4,75 @@ import { AllTokens } from "../Components/index";
 import { IoIosSearch } from "react-icons/io";
 
 function Tokens() {
+  const [tokenpass, setTokenPass] = useState(null);
+  const Coins_Token_2 = [
+    {
+      img: "eth",
+      name: "WETH",
+    },
+    {
+      img: "shib",
+      name: "SHIB",
+    },
+    {
+      img: "dai",
+      name: "DAI",
+    },
+    {
+      img: "matic",
+      name: "MATIC",
+    },
+    {
+      img: "usdc",
+      name: "USDC",
+    },
+    {
+      img: "avax",
+      name: "AVAX",
+    },
+    {
+      img: "btc",
+      name: "WBTC",
+    },
+    {
+      img: "uni",
+      name: "UNI",
+    },
+  ];
+  async function getRes() {
+    const res3 = await fetch("https://api.coincap.io/v2/assets");
+    let tok1 = Tokens.name;
+    const res = await res3.json();
+    // if (Coins_Token_2.name === "WETH") {
+    //   tok1 = "ETH";
+    // }
+    // if (Coins_Token_2.name === "WMATIC") {
+    //   tok1 = "MATIC";
+    // }
+    const data = res.data;
+    console.log(data);
+    let TokenArr = [];
+    const TokenArr_ = Coins_Token_2.map((token) => {
+      let a = token.name;
+      data.forEach((value) => {
+        if (value.symbol === a) {
+          TokenArr.push(value);
+        }
+      });
+    });
+    console.log(TokenArr);
+
+    return TokenArr;
+    // const filteredData1 = data.filter((value) => {
+    //   if(value.symbol === )
+    // });
+    //console.log(filteredData1);
+    // const filteredData2 = data.filter((value) =>{
+    //   if (value.symbol === )
+    // });
+
+    //   const res = await axios.post(URL, { query: query });
+  }
   const [allTokenList, setAllTokenList] = useState([
     {
       number: 1,
@@ -116,8 +185,12 @@ function Tokens() {
             />
           </div>
         </div>
-
-        <AllTokens allTokenList={allTokenList} />
+        {async () => {
+          const res = await getRes();
+          console.log(res);
+          setTokenPass(res);
+        }}
+        { tokenpass && <AllTokens allTokenList={tokenpass} />}
       </div>
     </div>
   );

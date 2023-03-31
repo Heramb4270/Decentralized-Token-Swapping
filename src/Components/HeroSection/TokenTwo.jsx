@@ -11,7 +11,7 @@ function TokenTwo(props) {
     // refimg.current.src = Icons.eth;
   };
 
-  props.isConnected() && clearField();
+  //props.isConnected() && clearField();
 
   return (
     <div className="flex items-center justify-between rounded-3xl pl-8 mt-4 border-[1.5px] border-[#001438]">
