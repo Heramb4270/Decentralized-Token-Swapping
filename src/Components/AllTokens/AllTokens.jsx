@@ -54,10 +54,10 @@ function AllTokens({ allTokenList }) {
         <tr className="mx-6">
           <th className="px-6 py-4 items-center">#</th>
           <th className="px-6 py-4 items-center">Token Name</th>
-          <th className="px-8  py-4 items-center">Price</th>
+          <th className="px-8 py-4 items-center">Price</th>
           <th className="px-6 py-4 items-center">Change</th>
           <th className="px-6 py-4 items-center">TVL</th>
-          <th className="px-6 py-4 items-center">Volume</th>
+          <th className="px-6 py-4 items-center w-[4.5rem]">Volume</th>
         </tr>
       </thead>
       <tbody>
@@ -73,7 +73,7 @@ function AllTokens({ allTokenList }) {
             <td className="px-6 py-2 align">{el.change}</td>
             <td className="px-6 py-2 align">{el.price}</td>
             <td className="px-6 py-2 align">{el.tvl}</td>
-            <td className="px-6 py-2 align">{el.volume}</td>
+            <td className="px-6 py-2 align w-[4.5rem]">{el.volume}</td>
           </tr>
         ))}
       </tbody>

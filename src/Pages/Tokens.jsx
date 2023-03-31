@@ -12,7 +12,7 @@ function Tokens() {
       symbol: "ETH",
       price: "$12,345",
       change: "+ 234.5",
-      tv1: "$7894.5 M",
+      tvl: "$7894.5 M",
       volume: "$716.5 M",
     },
     {
@@ -22,7 +22,7 @@ function Tokens() {
       symbol: "DAI",
       price: "$12,345",
       change: "+ 234.5",
-      tv1: "$7894.5 M",
+      tvl: "$7894.5 M",
       volume: "$716.5 M",
     },
     {
@@ -32,7 +32,7 @@ function Tokens() {
       symbol: "MATIC",
       price: "$12,345",
       change: "+ 234.5",
-      tv1: "$7894.5 M",
+      tvl: "$7894.5 M",
       volume: "$716.5 M",
     },
     {
@@ -42,7 +42,7 @@ function Tokens() {
       symbol: "ETH",
       price: "$12,345",
       change: "+ 234.5",
-      tv1: "$7894.5 M",
+      tvl: "$7894.5 M",
       volume: "$716.5 M",
     },
     {
@@ -98,7 +98,9 @@ function Tokens() {
         <h2 className="text-4xl font-normal">Top token on Uniswap</h2>
         <div className="TokenBoxHeader flex gap-4 items-center my-9">
           <div className="TokenBoxEth flex items-center gap-2 text-xl text-white font-bold bg-[#D01257] py-[.60rem] px-8 rounded-lg leading-0">
-            <p><img src={Img.matic} alt="matic logo" className="w-5 h-5" /></p>
+            <p>
+              <img src={Img.matic} alt="matic logo" className="w-5 h-5" />
+            </p>
             <p>Ethereum</p>
           </div>
           <div className="TokenBoxSearch flex items-center gap-4 bg-[#D01257] py-3 px-[2rem] leading-0 rounded-lg w-[70%]">
