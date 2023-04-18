@@ -117,40 +117,40 @@ function Tokens() {
     setTokenPass(res);
   })();
 
-  // const [copyAllTokenList, setCopyAllTokenList] = useState(allTokenList);
-  // const [search, setSearch] = useState("");
-  // const [searchItem, setSearchItem] = useState(search);
-  // const onHandleSearch = (value) => {
-  //   const filteredTokens = allTokenList.filter(({ name }) => {
-  //     name.toLowerCase().includes(value.toLowerCase());
-  //   });
+  const [copyAllTokenList, setCopyAllTokenList] = useState(allTokenList);
+  const [search, setSearch] = useState("");
+  const [searchItem, setSearchItem] = useState(search);
+  const onHandleSearch = (value) => {
+    const filteredTokens = allTokenList.filter(({ name }) => {
+      name.toLowerCase().includes(value.toLowerCase());
+    });
 
-  //   if (filteredTokens.length === 0) {
-  //     setCopyAllTokenList(allTokenList);
-  //     setAllTokenList(copyAllTokenList);
-  //   } else {
-  //     setAllTokenList(filteredTokens);
-  //   }
-  // };
+    if (filteredTokens.length === 0) {
+      setCopyAllTokenList(allTokenList);
+      setAllTokenList(copyAllTokenList);
+    } else {
+      setAllTokenList(filteredTokens);
+    }
+  };
 
-  // const onClearSearch = () => {
-  //   if (allTokenList.length && copyAllTokenList.length) {
-  //     setAllTokenList(copyAllTokenList);
-  //   }
-  // };
+  const onClearSearch = () => {
+    if (allTokenList.length && copyAllTokenList.length) {
+      setAllTokenList(copyAllTokenList);
+    }
+  };
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setSearch(searchItem), 1000);
-  //   return () => clearTimeout(timer);
-  // }, [searchItem]);
+  useEffect(() => {
+    const timer = setTimeout(() => setSearch(searchItem), 1000);
+    return () => clearTimeout(timer);
+  }, [searchItem]);
 
-  // useEffect(() => {
-  //   if (search) {
-  //     onHandleSearch(search);
-  //   } else {
-  //     onClearSearch();
-  //   }
-  // }, [search]);
+  useEffect(() => {
+    if (search) {
+      onHandleSearch(search);
+    } else {
+      onClearSearch();
+    }
+  }, [search]);
 
   return (
     <div className="Tokens ml-20 mr-20 mt-10">

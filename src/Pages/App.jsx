@@ -33,24 +33,28 @@ function App() {
 
   if (signer !== undefined) getWalletAddress();
   return (
-    <div>
-      <NavBar
-        provider={provider}
-        isConnected={isConnected}
-        signerAddress={signerAddress}
-        getSigner={getSigner}
-      />
-      {/*
-      <HeroSection
-        provider={provider}
-        isConnected={isConnected}
-        signerAddress={signerAddress}
-        signer={signer}
-        getSigner={getSigner}
-      />*/}
-      {<Tokens />}
+    <>
+      {!ChatwithGpt && (
+        <>
+          <NavBar
+            provider={provider}
+            isConnected={isConnected}
+            signerAddress={signerAddress}
+            getSigner={getSigner}
+          />
+          {/* <HeroSection
+            provider={provider}
+            isConnected={isConnected}
+            signerAddress={signerAddress}
+            signer={signer}
+            getSigner={getSigner}
+          /> */}
+        </>
+      )}
 
-      {ChatwithGpt && (
+      <Tokens />
+
+      {/* {ChatwithGpt && (
         <>
           <NavBar
             renderGPT={setChatWithGpt}
@@ -61,10 +65,10 @@ function App() {
           />
           <ChatGpt />
         </>
-      )}
+      )} */}
 
-      {/* {!ChatwithGpt && (
-        <>
+      {/* { ChatwithGpt && (
+        <div>
           <NavBar
             renderGPT={setChatWithGpt}
             provider={provider}
@@ -79,9 +83,10 @@ function App() {
             signer={signer}
             getSigner={getSigner}
           />
-        </>
-      )} */}
-    </div>
+          <div />
+          )
+        } */}
+    </>
   );
 }
 
