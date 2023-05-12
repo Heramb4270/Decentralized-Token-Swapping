@@ -4,9 +4,10 @@ import { ChatGpt } from "../Components";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import { AllTokens } from "../Components";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   const [provider, setProvider] = useState(undefined);
-  const [ChatwithGpt, setChatWithGpt] = useState(false);
+  const [ChatwithGpt, setChatWithGpt] = useState(true);
   const [signer, setSigner] = useState(undefined);
   const [signerAddress, setSignerAddress] = useState(undefined);
   useEffect(() => {
@@ -34,27 +35,87 @@ function App() {
   if (signer !== undefined) getWalletAddress();
   return (
     <>
-      {!ChatwithGpt && (
-        <>
-          <NavBar
-            provider={provider}
-            isConnected={isConnected}
-            signerAddress={signerAddress}
-            getSigner={getSigner}
+      <BrowserRouter>
+        <Routes>
+          <Route index element={
+            <>
+              <NavBar
+                provider={provider}
+                isConnected={isConnected}
+                signerAddress={signerAddress}
+                getSigner={getSigner}
+              />
+              <HeroSection
+                provider={provider}
+                isConnected={isConnected}
+                signerAddress={signerAddress}
+                signer={signer}
+                getSigner={getSigner}
+              />
+            </>
+          } />
+          <Route path="/Swap" element={
+            <>
+            <NavBar
+              provider={provider}
+              isConnected={isConnected}
+              signerAddress={signerAddress}
+              getSigner={getSigner}
+            />
+            <HeroSection
+              provider={provider}
+              isConnected={isConnected}
+              signerAddress={signerAddress}
+              signer={signer}
+              getSigner={getSigner}
+            />
+            </>
+          }
           />
-          {/* <HeroSection
+
+          <Route path="/SmartTrade" element={
+            <>
+              <NavBar
+                renderGPT={setChatWithGpt}
+                provider={provider}
+                isConnected={isConnected}
+                signerAddress={signerAddress}
+                getSigner={getSigner}
+              />
+              <ChatGpt />
+            </>
+          }/>
+
+          <Route path="/Tokens" element={
+            <>
+              <NavBar
+                renderGPT={setChatWithGpt}
+                provider={provider}
+                isConnected={isConnected}
+                signerAddress={signerAddress}
+                getSigner={getSigner}
+              />
+              <Tokens />
+            </>
+          }/>
+        
+        </Routes>
+      </BrowserRouter>
+      {/*!ChatwithGpt && (
+        <>
+          <HeroSection
             provider={provider}
             isConnected={isConnected}
             signerAddress={signerAddress}
             signer={signer}
             getSigner={getSigner}
-          /> */}
+          />
         </>
-      )}
+      )*/}
 
-      <Tokens />
+      {/* <Tokens /> */}
 
-      {/* {ChatwithGpt && (
+      {/*ChatwithGpt && (
         <>
           <NavBar
             renderGPT={setChatWithGpt}
@@ -65,7 +126,7 @@ function App() {
           />
           <ChatGpt />
         </>
-      )} */}
+      )*/}
 
       {/* { ChatwithGpt && (
         <div>

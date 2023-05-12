@@ -3,19 +3,20 @@ import NavBar_Middle from "./NavBar_Middle";
 import NavBar_Right from "./NavBar_Right";
 import Link from "../../Links/Link";
 
+
 function NavBar(props) {
   const menuItem = [
     {
       name: "Swap",
-      link: "/",
+      link: "/Swap",
     },
     {
       name: "Tokens",
-      link: "/",
+      link: "/Tokens",
     },
     {
-      name: "Pool",
-      link: "/",
+      name: "SmartTrade",
+      link: "/SmartTrade",
     },
   ];
 
