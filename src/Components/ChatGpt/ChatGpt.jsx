@@ -252,6 +252,7 @@ function ChatGpt(props) {
           isClosable={isClosable}
           subject={subject}
           message={message}
+          setLarge={true}
           setOpenMessageModel={setOpenMessageModel}
         />
       )}

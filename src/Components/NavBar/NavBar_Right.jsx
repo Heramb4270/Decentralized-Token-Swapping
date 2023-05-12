@@ -25,7 +25,7 @@ function NavBar_Right(props) {
         </div>
       ) : (
         <button
-          className="text-[#d1ceff] bg-[#40418d] bg-[#D01257] px-3 py-3 rounded-full cursor-pointer font-bold"
+          className="text-white bg-[#40418d] bg-[#D01257] px-3 py-3 rounded-full cursor-pointer font-bold"
           onClick={() => {
             setOpenModel(true);
           }}
